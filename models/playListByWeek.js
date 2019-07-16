@@ -1,9 +1,10 @@
 module.exports = function(sequelize, DataTypes) {
     var playListByWeek = sequelize.define("playListByWeek", {
-     id:DataTypes.INTEGER,
+    uname:DataTypes.STRING,
      day:DataTypes.STRING,
      playList:DataTypes.STRING,
     });
+    playListByWeek.belongsTo(user_data);
     return playListByWeek;
   };
   
