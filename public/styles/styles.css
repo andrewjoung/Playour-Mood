@@ -1,3 +1,58 @@
 .list-group-item {
   line-height: 2.5;
 }
+
+body {
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  font-family: 'Varela', sans-serif;
+}
+
+#coverDiv {
+  height: 100vh;
+}
+
+#mainContent {
+  text-align: center;
+  padding-top: 23vh;
+}
+
+#weatherIcon, h1, h2{
+  color: white;
+  text-shadow: 0px 0px 15px #000000bf;
+}
+
+#weatherIcon {
+  margin-bottom: 10px;
+}
+
+h1 {
+  font-size: 80px;
+  font-weight: bold;
+}
+
+#temp {
+  margin-bottom: 20px;
+}
+
+#playlistButton {
+  width: 245px;
+}
+
+#navbar {
+  background-color: #3f3f3fb8;
+  padding-right: 20px;
+}
+
+#appName {
+  color: white;  
+}
+
+#userIcon {
+  color: white;
+}
+
+.your {
+  color: #00c851;
+}
