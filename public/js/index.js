@@ -102,6 +102,30 @@ $(document).ready(function(){
 
   if(window.location.pathname === "/") {
 
+    console.log("al;sjfl;adjsf");
+
+    $("#registerForm").on("submit", function(event) {
+
+      console.log("register submitted");
+
+      event.preventDefault();
+      
+      var newUser = {
+        userEmail: $("#userEmail").val(),
+        userPassword: $("#userPassword").val()
+      };
+
+      console.log($("#userEmail").val());
+      console.log($("#userPassword").val());
+      
+      $.ajax("/database", {
+        type: "POST",
+        data: newUser
+      }).then(function() {
+        console.log("created new user");
+      });
+    });
+
   } else if (window.location.pathname === "/main") {
 
     $.ajax("/getweather", {type:"GET"}).then(function(data){
