@@ -4,7 +4,7 @@ module.exports = function(sequelize, DataTypes) {
      day:DataTypes.STRING,
      playList:DataTypes.STRING,
     });
-    playListByWeek.belongsTo(user_data);
+    
     return playListByWeek;
   };
   
