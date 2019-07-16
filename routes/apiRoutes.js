@@ -2,7 +2,16 @@ var db = require("../models");
 var axios = require('axios');
 
 module.exports = function(app) {
-  // Get all examples
+  
+  app.post("/",function(req,res){
+
+    db.user_data.create({
+      uname:req.body.text,
+      password:req.body.text
+    })
+
+  });
+
   app.get("/api/examples", function(req, res) {
     db.Example.findAll({}).then(function(dbExamples) {
       res.json(dbExamples);
