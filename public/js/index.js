@@ -130,6 +130,9 @@ $(document).ready(function(){
       $("#temp").text(Math.floor(tempF) + String.fromCharCode(176)+"F");
     });
     
+    $("#playlistButton").on("click", function(){
+
+    });
   }
 
 });
