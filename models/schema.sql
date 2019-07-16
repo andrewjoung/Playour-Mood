@@ -7,7 +7,7 @@ CREATE TABLE user_data(
 	uid INT NOT NULL AUTO_INCREMENT,
     uname VARCHAR(15),
     password VARCHAR(16),
-    fav_genre TEXT,
+    fav_genre TEXT ,
     rainy_choices TEXT,
     cloudy_choices TEXT,
     sunny_choices TEXT, 
