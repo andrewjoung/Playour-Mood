@@ -2,12 +2,12 @@ module.exports = function(sequelize, DataTypes) {
   var user_data = sequelize.define("user_data", {
    uname:{
      type:DataTypes.STRING,
-     allowNull:False,
-     primaryKey:TRUE
+     allowNull:false,
+     primaryKey:true
    },
    password:{
      type:DataTypes.STRING,
-     allowNull:False,
+     allowNull:false,
      len:[8,16]
    },
    fav_genre:{
