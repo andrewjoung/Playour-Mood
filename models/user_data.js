@@ -3,7 +3,7 @@ module.exports = function(sequelize, DataTypes) {
    uname:{
      type:DataTypes.STRING,
      allowNull:false,
-     primaryKey:TRUE
+     primaryKey:true
    },
    password:{
      type:DataTypes.STRING,
