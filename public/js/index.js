@@ -105,6 +105,7 @@ $(document).ready(function(){
     console.log(data.weather[0].main);
 
     var weather = data.weather[0].main;
+    // var weather = "clear";
     var randomNum = Math.floor((Math.random() * 4) + 1);
     var tempK = data.main.temp;
     var tempF = ((tempK - 273.15) * 9) / 5 + 32;
@@ -115,9 +116,9 @@ $(document).ready(function(){
       $('body').css("background-image", "url(../images/cloudy/cloudy" + randomNum + ".jpg)");
       $("#weatherIcon").addClass("fas fa-cloud fa-5x");
     } else if (weather.toLowerCase() === "clear") { //sunny weather
-      $('body').css("background-image", "../images/sunny/sunny" + randomNum + ".jpg");
+      $('body').css("background-image", "url(../images/sunny/sunny" + randomNum + ".jpg)");
     } else if (weather.toLowerCase() === "rain") {
-      $('body').css("background-image", "../images/rainy/rainy" + randomNum + ".jpg");
+      $('body').css("background-image", "url(../images/rainy/rainy" + randomNum + ".jpg)");
     }
 
     $("#location").text(data.name);
