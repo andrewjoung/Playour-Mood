@@ -6,7 +6,7 @@ module.exports = function(sequelize, DataTypes) {
      sunny_list:DataTypes.TEXT,
   
     });
-    playList.belongsTo(user_data);
+    
     return playList;
   };
   
