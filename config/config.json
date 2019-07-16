@@ -1,7 +1,7 @@
 {
   "development": {
     "username": "root",
-    "password": "Digambara11$$",
+    "password": "duck0803",
     "database": "playeour_mood_db",
     "host": "localhost",
     "dialect": "mysql"

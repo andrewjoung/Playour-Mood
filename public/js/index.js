@@ -101,6 +101,8 @@
 $(document).ready(function(){
 
   if(window.location.pathname === "/") {
+    
+    //register logic 
 
   } else if (window.location.pathname === "/main") {
 
@@ -131,7 +133,7 @@ $(document).ready(function(){
     });
     
     $("#playlistButton").on("click", function(){
-
+      
     });
   }
 
