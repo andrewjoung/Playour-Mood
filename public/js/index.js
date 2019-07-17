@@ -98,9 +98,9 @@
 // $submitBtn.on("click", handleFormSubmit);
 // $exampleList.on("click", ".delete", handleDeleteBtnClick);
 
-$(document).ready(function(){
+$(document).ready(function () {
 
-  $.ajax("/getweather", {type:"GET"}).then(function(data){
+  $.ajax("/getweather", { type: "GET" }).then(function (data) {
     console.log(data);
     console.log(data.weather[0].main);
 
@@ -111,7 +111,7 @@ $(document).ready(function(){
     var tempF = ((tempK - 273.15) * 9) / 5 + 32;
     console.log(tempF);
     //cloudy weather
-    if(weather.toLowerCase() === "clouds" || weather.toLowerCase() === "haze" || weather.toLowerCase() === "fog") {
+    if (weather.toLowerCase() === "clouds" || weather.toLowerCase() === "haze" || weather.toLowerCase() === "fog") {
       console.log("entering cloud if");
       $('body').css("background-image", "url(../images/cloudy/cloudy" + randomNum + ".jpg)");
       $("#weatherIcon").addClass("fas fa-cloud fa-5x");
@@ -123,7 +123,8 @@ $(document).ready(function(){
 
     $("#location").text(data.name);
     $("#weather").text(weather);
-    $("#temp").text(Math.floor(tempF) + String.fromCharCode(176)+"F");
+    $("#temp").text(Math.floor(tempF) + String.fromCharCode(176) + "F");
   });
 
+ 
 });
