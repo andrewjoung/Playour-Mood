@@ -6,16 +6,79 @@
             <p class="h4 mb-4">Sign up</p>
 
             <!-- E-mail -->
-            <input type="email" id="defaultRegisterFormEmail" class="form-control mb-4" placeholder="E-mail">
+            <input type="email" class="form-control mb-4" placeholder="E-mail" id="userEmail">
 
             <!-- Password -->
+<<<<<<< HEAD
             <input type="password" id="defaultRegisterFormPassword" class="form-control" placeholder="Password"
                 aria-describedby="defaultRegisterFormPasswordHelpBlock">
+=======
+            <input type="password" class="form-control" placeholder="Password"
+                aria-describedby="defaultRegisterFormPasswordHelpBlock" id="userPassword">
+>>>>>>> 209321cb42c3f7e8929d7bc4beb34ddcf5f62de6
             <small id="defaultRegisterFormPasswordHelpBlock" class="form-text text-muted mb-4">
                 At least 8 characters and 1 digit
             </small>
+            <button class="btn btn-info my-4 btn-block" type="submit" id="registerButton">Register</button>
 
-            {{!-- <!-- Subject -->
+            <!-- Terms of service -->
+            <p>By clicking
+                <em>Sign up</em> you agree to our
+                <a href="" target="_blank">terms of service</a>
+
+        </form>
+    </div>
+</div>
+
+<script>
+    $('#surveyMain').hide();
+    $('#registerButton').on('click', function () {
+        $('#registerMain').hide();
+        $('#surveyMain').show();
+       
+    })
+</script>
+
+<div id="surveyMain">
+    <div class="container" id="surveyMainContent">
+
+        
+
+        <label>What genre of music do you like primarily listen to?</label>
+        <select class="browser-default custom-select mb-4" multiple>
+            <option value="" disabled>Choose option</option>
+            <option value="rock" selected>Rock</option>
+            <option value="hip-hop">Hip-Hop/R&amp;B</option>
+            <option value="pop">Pop</option>
+            <option value="electronic">Jazz</option>
+            <option value="popRock">Pop Rock</option>
+            <option value="grunge">Grunge</option>
+        </select>
+
+        <label>On rainy days, you like to listen to: </label>
+        <select id="rainyDayOptions" class="browser-default custom-select mb-4">
+            <option value="" disabled>Choose option</option>
+            <option value="slow" selected>Slow, calming music</option>
+            <option value="happy">Happy, uplifting, exciting music</option>
+        </select>
+
+        <label>On cloudy days, you like to listen to: </label>
+        <select id="cloudyDayOptions" class="browser-default custom-select mb-4">
+            <option value="" disabled>Choose option</option>
+            <option value="slow" selected>Slow, calming music</option>
+            <option value="happy">Happy, uplifting, exciting music</option>
+        </select>
+
+        <label>On sunny days, you like to listen to: </label>
+        <select id="sunnyDayOptions" class="browser-default custom-select mb-4">
+            <option value="" disabled>Choose option</option>
+            <option value="slow" selected>Slow, calming music</option>
+            <option value="happy">Happy, uplifting, exciting music</option>
+        </select>
+    </div>
+</div>
+
+{{!-- <!-- Subject -->
             <label>What genre of music do you like primarily listen to?</label>
             <select class="browser-default custom-select mb-4">
                 <option value="" disabled>Choose option</option>
@@ -46,6 +109,7 @@
                 <option value="happy">Happy, uplifting, exciting music</option>
             </select> --}}
 
+<<<<<<< HEAD
             <!-- Sign up button -->
             <button class="btn btn-info my-4 btn-block" type="submit">Register</button>
             <div id="googleButtonParent">
@@ -73,8 +137,8 @@
             <p>By clicking
                 <em>Sign up</em> you agree to our
                 <a href="" target="_blank">terms of service</a>
+=======
+<!-- Sign up button -->
+>>>>>>> 209321cb42c3f7e8929d7bc4beb34ddcf5f62de6
 
-        </form>
-        <!-- Default form register -->
-    </div>
-</div>
+<!-- Default form register -->
