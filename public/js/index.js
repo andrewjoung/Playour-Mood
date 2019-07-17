@@ -156,7 +156,7 @@ $(document).ready(function () {
         $("#weatherIcon").addClass("fas fa-cloud-showers-heavy fa-5x");
       }
 
-      $("#location").text(data.name);
+      $("#location").text(data.weatherData.name);
       $("#weather").text(weather);
       $("#temp").text(Math.floor(tempF) + String.fromCharCode(176)+"F");
     });
