@@ -9,11 +9,18 @@ var spotify = new Spotify({
 
 module.exports = function(app) {
   // Get all examples
-  app.post('/',function(req,res){
+  app.post('/database',function(req,res){
+    console.log("in route /database");
     db.user_data.create({
-      uname:req.body.text,
-      password:req.body.text
-    })
+      uname:req.body.userEmail,
+      password:req.body.userPassword
+    }).then(function(postData){
+      res.json(postData);
+    });
+  });
+
+  app.get("/", function(req, res) {
+    res.render("register");
   });
 
   app.get("/api/examples", function(req, res) {
