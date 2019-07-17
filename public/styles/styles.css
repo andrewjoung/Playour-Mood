@@ -13,6 +13,13 @@ body {
   height: 100vh;
 }
 
+#googleButtonParent{
+  text-align: center;
+}
+
+.g-signin2{
+  display: inline-block;
+}
 #mainContent, #registerMainContent {
   text-align: center;
   padding-top: 23vh;

@@ -1,4 +1,3 @@
-<div class="g-signin2" data-onsuccess="onSignIn" data-onfailure="onFailure" data-theme="dark"></div>
 <div id="registerMain">
     <div id="registerMainContent" class="container">
         <!-- Default form register -->
@@ -49,6 +48,8 @@
 
             <!-- Sign up button -->
             <button class="btn btn-info my-4 btn-block" type="submit">Register</button>
+            <div id="googleButtonParent">
+            <div class="g-signin2" data-onsuccess="onSignIn" data-onfailure="onFailure" data-theme="dark"></div></div>
 
             <script>
                 function onFailure() { console.error('Failure'); }
@@ -60,7 +61,7 @@
                     console.log('Full Name: ' + profile.getName());
                     console.log('Given Name: ' + profile.getGivenName());
                     console.log('Family Name: ' + profile.getFamilyName());
-                    console.log("Image URL: " + profile.getImageUrl());
+                    console.log("Image URL: " + profile.getImageUrl()); nod
                     console.log("Email: " + profile.getEmail());
 
                     // The ID token you need to pass to your backend:
