@@ -98,7 +98,7 @@
 // $submitBtn.on("click", handleFormSubmit);
 // $exampleList.on("click", ".delete", handleDeleteBtnClick);
 
-$(document).ready(function(){
+$(document).ready(function () {
 
   if(window.location.pathname === "/") {
     
@@ -163,4 +163,5 @@ $(document).ready(function(){
     });
   }
 
+ 
 });
