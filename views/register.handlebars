@@ -30,14 +30,20 @@
     $('#registerButton').on('click', function () {
         $('#registerMain').hide();
         $('#surveyMain').show();
-       
+
     })
 </script>
 
 <div id="surveyMain">
     <div class="container" id="surveyMainContent">
 
-        
+
+        <select class="selectpicker" multiple data-live-search="true">
+            <option>Mustard</option>
+            <option>Ketchup</option>
+            <option>Relish</option>
+        </select>
+
 
         <label>What genre of music do you like primarily listen to?</label>
         <select class="browser-default custom-select mb-4" multiple>
