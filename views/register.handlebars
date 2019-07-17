@@ -14,8 +14,12 @@
             <small id="defaultRegisterFormPasswordHelpBlock" class="form-text text-muted mb-4">
                 At least 8 characters and 1 digit
             </small>
+
             <button class="btn btn-info my-4 btn-block" type="submit" id="registerButton">Register</button>
 
+            <div id="googleButtonParent">
+                <div class="g-signin2" data-onsuccess="onSignIn" data-onfailure="onFailure" data-theme="dark"></div>
+            </div>
             <!-- Terms of service -->
             <p>By clicking
                 <em>Sign up</em> you agree to our
@@ -24,15 +28,6 @@
         </form>
     </div>
 </div>
-
-<script>
-    $('#surveyMain').hide();
-    $('#registerButton').on('click', function () {
-        $('#registerMain').hide();
-        $('#surveyMain').show();
-
-    })
-</script>
 
 <div id="surveyMain">
     <div class="container" id="surveyMainContent">
@@ -76,47 +71,21 @@
             <option value="slow" selected>Slow, calming music</option>
             <option value="happy">Happy, uplifting, exciting music</option>
         </select>
+
     </div>
-</div>
 
-{{!-- <!-- Subject -->
-            <label>What genre of music do you like primarily listen to?</label>
-            <select class="browser-default custom-select mb-4">
-                <option value="" disabled>Choose option</option>
-                <option value="rock" selected>Rock</option>
-                <option value="hip-hop">Hip-Hop/R&amp;B</option>
-                <option value="pop">Pop</option>
-                <option value="electronic">Electronic</option>
-            </select>
-
-            <label>On rainy days, you like to listen to: </label>
-            <select id="rainyDayOptions" class="browser-default custom-select mb-4">
-                <option value="" disabled>Choose option</option>
-                <option value="sad" selected>Sad, slow, calming music</option>
-                <option value="happy">Happy, uplifting, exciting music</option>
-            </select>
-
-            <label>On cloudy days, you like to listen to: </label>
-            <select id="cloudyDayOptions" class="browser-default custom-select mb-4">
-                <option value="" disabled>Choose option</option>
-                <option value="sad" selected>Sad, slow, calming music</option>
-                <option value="happy">Happy, uplifting, exciting music</option>
-            </select>
-
-            <label>On sunny days, you like to listen to: </label>
-            <select id="sunnyDayOptions" class="browser-default custom-select mb-4">
-                <option value="" disabled>Choose option</option>
-                <option value="sad" selected>Sad, slow, calming music</option>
-                <option value="happy">Happy, uplifting, exciting music</option>
-            </select> --}}
-
-            <!-- Sign up button -->
-<button class="btn btn-info my-4 btn-block" type="submit">Register</button>
-<div id="googleButtonParent">
-    <div class="g-signin2" data-onsuccess="onSignIn" data-onfailure="onFailure" data-theme="dark"></div>
 </div>
 
 <script>
+
+    $('#surveyMain').hide();
+
+    $('#registerButton').on('click', function () {
+        $('#registerMain').hide();
+        $('#surveyMain').show();
+
+    })
+
     function onFailure() { console.error('Failure'); }
 
     function onSignIn(googleUser) {
@@ -134,9 +103,5 @@
         console.log("ID Token: " + id_token);
     }
 </script>
-<!-- Terms of service -->
-<p>By clicking
-    <em>Sign up</em> you agree to our
-    <a href="" target="_blank">terms of service</a>
 
 <!-- Default form register -->
