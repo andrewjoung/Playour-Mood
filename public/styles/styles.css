@@ -9,11 +9,11 @@ body {
   font-family: 'Varela', sans-serif;
 }
 
-#coverDiv {
+#coverDiv, #registerMain {
   height: 100vh;
 }
 
-#mainContent {
+#mainContent, #registerMainContent {
   text-align: center;
   padding-top: 23vh;
 }
@@ -55,4 +55,9 @@ h1 {
 
 .your {
   color: #00c851;
+}
+
+#registerForm {
+  padding-left: 8rem!important;
+  padding-right: 8rem!important;
 }

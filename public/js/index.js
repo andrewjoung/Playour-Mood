@@ -100,31 +100,37 @@
 
 $(document).ready(function () {
 
-  $.ajax("/getweather", { type: "GET" }).then(function (data) {
-    console.log(data);
-    console.log(data.weather[0].main);
+  if(window.location.pathname === "/") {
 
-    var weather = data.weather[0].main;
-    // var weather = "clear";
-    var randomNum = Math.floor((Math.random() * 4) + 1);
-    var tempK = data.main.temp;
-    var tempF = ((tempK - 273.15) * 9) / 5 + 32;
-    console.log(tempF);
-    //cloudy weather
-    if (weather.toLowerCase() === "clouds" || weather.toLowerCase() === "haze" || weather.toLowerCase() === "fog") {
-      console.log("entering cloud if");
-      $('body').css("background-image", "url(../images/cloudy/cloudy" + randomNum + ".jpg)");
-      $("#weatherIcon").addClass("fas fa-cloud fa-5x");
-    } else if (weather.toLowerCase() === "clear") { //sunny weather
-      $('body').css("background-image", "url(../images/sunny/sunny" + randomNum + ".jpg)");
-    } else if (weather.toLowerCase() === "rain") {
-      $('body').css("background-image", "url(../images/rainy/rainy" + randomNum + ".jpg)");
-    }
+  } else if (window.location.pathname === "/main") {
 
-    $("#location").text(data.name);
-    $("#weather").text(weather);
-    $("#temp").text(Math.floor(tempF) + String.fromCharCode(176) + "F");
-  });
+    $.ajax("/getweather", {type:"GET"}).then(function(data){
+      console.log(data);
+      console.log(data.weather[0].main);
+
+      var weather = data.weather[0].main;
+      // var weather = "clear";
+      var randomNum = Math.floor((Math.random() * 4) + 1);
+      var tempK = data.main.temp;
+      var tempF = ((tempK - 273.15) * 9) / 5 + 32;
+      console.log(tempF);
+      console.log(window.location);
+      if(weather.toLowerCase() === "clouds" || weather.toLowerCase() === "haze" || weather.toLowerCase() === "fog") {
+        console.log("entering cloud if");
+        $('body').css("background-image", "url(../images/cloudy/cloudy" + randomNum + ".jpg)");
+        $("#weatherIcon").addClass("fas fa-cloud fa-5x");
+      } else if (weather.toLowerCase() === "clear") { //sunny weather
+        $('body').css("background-image", "url(../images/sunny/sunny" + randomNum + ".jpg)");
+      } else if (weather.toLowerCase() === "rain") {
+        $('body').css("background-image", "url(../images/rainy/rainy" + randomNum + ".jpg)");
+      }
+
+      $("#location").text(data.name);
+      $("#weather").text(weather);
+      $("#temp").text(Math.floor(tempF) + String.fromCharCode(176)+"F");
+    });
+    
+  }
 
  
 });

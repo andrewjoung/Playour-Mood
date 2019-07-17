@@ -10,6 +10,7 @@ module.exports = function(app) {
     //     examples: dbExamples
     //   });
     // });
+    //res.send("This will be the register page");
     res.render("register");
   });
 
