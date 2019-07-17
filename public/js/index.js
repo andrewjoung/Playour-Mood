@@ -101,6 +101,8 @@
 $(document).ready(function(){
 
   if(window.location.pathname === "/") {
+    
+    //register logic 
 
   } else if (window.location.pathname === "/main") {
 
@@ -130,6 +132,11 @@ $(document).ready(function(){
       $("#temp").text(Math.floor(tempF) + String.fromCharCode(176)+"F");
     });
     
+    //TODO:
+    //Spotify API call
+    $("#playlistButton").on("click", function(){
+      
+    });
   }
 
 });
