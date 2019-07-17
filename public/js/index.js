@@ -132,6 +132,8 @@ $(document).ready(function(){
       $("#temp").text(Math.floor(tempF) + String.fromCharCode(176)+"F");
     });
     
+    //TODO:
+    //Spotify API call
     $("#playlistButton").on("click", function(){
       
     });

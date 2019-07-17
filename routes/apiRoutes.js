@@ -1,5 +1,11 @@
 var db = require("../models");
 var axios = require('axios');
+var Spotify = require('node-spotify-api');
+
+var spotify = new Spotify({
+  id: "d551accfb0ba4db99eb755dd09d0bc0c",
+  secret: "398b1703348c4ef2a7f8905e6c4178a1"
+});
 
 module.exports = function(app) {
   // Get all examples
@@ -16,6 +22,8 @@ module.exports = function(app) {
     });
   });
 
+  //TODO:
+  //Make the API specific to user location
   app.get("/getweather",function(req, res) {
     var apiKey = "3157d00bf198cb3d5c714f82d8eac54f";
     var queryUrl = "https://api.openweathermap.org/data/2.5/weather?zip=98006,us&appid=" + apiKey
@@ -27,12 +35,15 @@ module.exports = function(app) {
       res.json(data.data);
       dataObject.weatherData = data.data;
       console.log(dataObject);
+      
       // axios.get(//spotify route)
     }).catch(function(error){
       throw error;
     });
   });
 
+  //TODO:
+  //Spotify API call
   app.get("/getsongs", function(req, res) {
     
   });
