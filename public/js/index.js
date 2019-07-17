@@ -99,7 +99,9 @@
 // $exampleList.on("click", ".delete", handleDeleteBtnClick);
 
 $(document).ready(function () {
-
+  var username;
+  
+  
   if(window.location.pathname === "/") {
     
     //register logic 
@@ -111,7 +113,7 @@ $(document).ready(function () {
       console.log("register submitted");
 
       event.preventDefault();
-      
+      username=$("#userEmail").val();
       var newUser = {
         userEmail: $("#userEmail").val(),
         userPassword: $("#userPassword").val()
@@ -127,6 +129,53 @@ $(document).ready(function () {
         console.log("created new user");
       });
     });
+
+    $("#saveSurvey").on("click", function(event) {
+
+      console.log("survey submitted");
+
+      event.preventDefault();
+
+      var favGen=[];
+
+      $.each($("#chk:checked"), function () {
+        favGen.push($(this).val());
+      });
+      
+      var newSurvey = {
+        uname:username,
+        fav_genre:favGen.join(','),
+        rainy_choices:$('#rainyDayOptions option:selected').text(),
+        cloudy_choices:$('#cloudyDayOptions option:selected').text(),
+        sunny_choices:$('#sunnyDayOptions option:selected').text()
+      };
+      
+      $.ajax("/database", {
+        type: "PUT",
+        data: newSurvey
+      }).then(function() {
+        console.log("created Survey");
+      });
+    });
+
+    $('#googleButtonParent').on('click',function(event){
+      console.log("goggle sign in submitted");
+
+      event.preventDefault();
+     
+      var goggleUser = {
+        userEmail: profile.getEmail(),
+        userPassword: profile.getPassword()
+      };
+
+      $.ajax("/database", {
+        type: "POST",
+        data: goggleUser
+      }).then(function() {
+        console.log("created new user");
+      });
+
+    })
 
   } else if (window.location.pathname === "/main") {
 

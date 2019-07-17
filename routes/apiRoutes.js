@@ -19,6 +19,23 @@ module.exports = function(app) {
     });
   });
 
+  app.put('/database',function(req,res){
+    db.user_data.update(
+      {
+        fav_genre:req.body.fav_genre,
+        rainy_choices:req.body.rainy_choices,
+        cloudy_choices:req.body.cloudy_choices,
+        sunny_choices:req.body.sunny_choices
+      },{
+        where:{
+          uname:req.body.uname
+        }
+      }
+    ).then(function(userData){
+      res.json(userData);
+    })
+  })
+
   app.get("/", function(req, res) {
     res.render("register");
   });

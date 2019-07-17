@@ -30,78 +30,105 @@
 </div>
 
 <div id="surveyMain">
-    <div class="container" id="surveyMainContent">
+    <div class="container text-center border border-light p-3" id="surveyMainContent" style="margin-top:5%">
+      <label>What genre of music do you like primarily listen to?</label>
+        <div class="input-group mb-8 justify-content-center">
+            <div class="input-group-prepend">
+                <div class="input-group-text">
+                    <input type="checkbox" aria-label="Checkbox for following text input" value="Rock" id="chk">Rock
+                    <br>
+                </div>
+                <div class="input-group-text">
+                    <input type="checkbox" aria-label="Checkbox for following text input" value="Pop" id="chk">Pop<br>
+                </div>
+                <div class="input-group-text">
+                    <input type="checkbox" aria-label="Checkbox for following text input" value="Hip-Hop"
+                        id="chk">Hip-Hop<br>
+                </div>
+                <div class="input-group-text">
+                    <input type="checkbox" aria-label="Checkbox for following text input" value="Jazz" id="chk">Jazz<br>
+                </div>
+                <div class="input-group-text">
+                    <input type="checkbox" aria-label="Checkbox for following text input" value="Pop Rock" id="chk">Pop
+                    Rock<br>
+                </div>
+                <div class="input-group-text">
+                    <input type="checkbox" aria-label="Checkbox for following text input" value="Grunge"id="chk">Grunge<br>
+                </div> 
+            </div>
 
+        </div>
 
-        <select class="selectpicker" multiple data-live-search="true">
-            <option>Mustard</option>
-            <option>Ketchup</option>
-            <option>Relish</option>
-        </select>
-
-
-        <label>What genre of music do you like primarily listen to?</label>
-        <select class="browser-default custom-select mb-4" multiple>
-            <option value="" disabled>Choose option</option>
-            <option value="rock" selected>Rock</option>
-            <option value="hip-hop">Hip-Hop/R&amp;B</option>
-            <option value="pop">Pop</option>
-            <option value="electronic">Jazz</option>
-            <option value="popRock">Pop Rock</option>
-            <option value="grunge">Grunge</option>
-        </select>
+        <br>
 
         <label>On rainy days, you like to listen to: </label>
         <select id="rainyDayOptions" class="browser-default custom-select mb-4">
             <option value="" disabled>Choose option</option>
-            <option value="slow" selected>Slow, calming music</option>
-            <option value="happy">Happy, uplifting, exciting music</option>
+            <option value="slow" selected>Slow, calming</option>
+            <option value="happy">Happy, uplifting, exciting</option>
         </select>
 
         <label>On cloudy days, you like to listen to: </label>
         <select id="cloudyDayOptions" class="browser-default custom-select mb-4">
             <option value="" disabled>Choose option</option>
-            <option value="slow" selected>Slow, calming music</option>
-            <option value="happy">Happy, uplifting, exciting music</option>
+            <option value="slow" selected>Slow, calming</option>
+            <option value="happy">Happy, uplifting, exciting </option>
         </select>
 
         <label>On sunny days, you like to listen to: </label>
         <select id="sunnyDayOptions" class="browser-default custom-select mb-4">
             <option value="" disabled>Choose option</option>
-            <option value="slow" selected>Slow, calming music</option>
-            <option value="happy">Happy, uplifting, exciting music</option>
+            <option value="slow" selected>Slow, calming</option>
+            <option value="happy">Happy, uplifting, exciting</option>
         </select>
 
+        <button class="btn btn-info my-4 btn-block" type="submit" id="saveSurvey">Save</button>
+
+
     </div>
+
 
 </div>
 
 <script>
-
+    var favGen = [];
+    var email;
     $('#surveyMain').hide();
 
     $('#registerButton').on('click', function () {
         $('#registerMain').hide();
         $('#surveyMain').show();
+        $('#saveSurvey').on('click', function () {
+            $.each($("#chk:checked"), function () {
+                favGen.push($(this).val());
+            });
+            console.log(favGen.join(','));
+            console.log($('#rainyDayOptions option:selected').text());
+            console.log($('#cloudyDayOptions option:selected').text());
+            console.log($('#sunnyDayOptions option:selected').text());
+        })
+
 
     })
 
     function onFailure() { console.error('Failure'); }
 
-    function onSignIn(googleUser) {
-        // Useful data for your client-side scripts:
-        var profile = googleUser.getBasicProfile();
-        console.log("ID: " + profile.getId()); // Don't send this directly to your server!
-        console.log('Full Name: ' + profile.getName());
-        console.log('Given Name: ' + profile.getGivenName());
-        console.log('Family Name: ' + profile.getFamilyName());
-        console.log("Image URL: " + profile.getImageUrl()); nod
-        console.log("Email: " + profile.getEmail());
+  function onSignIn(googleUser) {
+    // Useful data for your client-side scripts:
+    profile = googleUser.getBasicProfile();
+    console.log("ID: " + profile.getId()); // Don't send this directly to your server!
+    console.log('Full Name: ' + profile.getName());
+    console.log('Given Name: ' + profile.getGivenName());
+    console.log('Family Name: ' + profile.getFamilyName());
+    console.log("Image URL: " + profile.getImageUrl()); nod
+     email= profile.getEmail());
 
-        // The ID token you need to pass to your backend:
-        var id_token = googleUser.getAuthResponse().id_token;
-        console.log("ID Token: " + id_token);
-    }
+    // The ID token you need to pass to your backend:
+    var id_token = googleUser.getAuthResponse().id_token;
+    console.log("ID Token: " + id_token);
+}
+
+    
 </script>
 
 <!-- Default form register -->
