@@ -132,12 +132,15 @@ $(document).ready(function () {
 
     $.ajax("/getweather", {type:"GET"}).then(function(data){
       console.log(data);
-      console.log(data.weather[0].main);
-
-      var weather = data.weather[0].main;
+      console.log(data.weatherData.weather[0].main);
+      //console.log(data.spotifyData.playlists);
+      //console.log(data.spotifyData);
+      //console.log(data.spotifyData);
+      console.log(data.spotifyData);
+      var weather = data.weatherData.weather[0].main;
       // var weather = "clear";
       var randomNum = Math.floor((Math.random() * 4) + 1);
-      var tempK = data.main.temp;
+      var tempK = data.weatherData.main.temp;
       var tempF = ((tempK - 273.15) * 9) / 5 + 32;
       console.log(tempF);
       console.log(window.location);
@@ -147,8 +150,10 @@ $(document).ready(function () {
         $("#weatherIcon").addClass("fas fa-cloud fa-5x");
       } else if (weather.toLowerCase() === "clear") { //sunny weather
         $('body').css("background-image", "url(../images/sunny/sunny" + randomNum + ".jpg)");
+        $("#weatherIcon").addClass("fas fa-sun fa-5x");
       } else if (weather.toLowerCase() === "rain") {
         $('body').css("background-image", "url(../images/rainy/rainy" + randomNum + ".jpg)");
+        $("#weatherIcon").addClass("fas fa-cloud-showers-heavy fa-5x");
       }
 
       $("#location").text(data.name);
