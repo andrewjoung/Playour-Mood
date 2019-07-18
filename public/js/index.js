@@ -1,3 +1,4 @@
+
 $(document).ready(function () {
   var username;
   
@@ -5,6 +6,36 @@ $(document).ready(function () {
   if(window.location.pathname === "/") {
     
    
+    
+
+    $('#signIn').on("click",function(event){
+      console.log("In sign In");
+     
+      var newUser = {
+        userEmail: $("#userEmail").val(),
+        userPassword: $("#userPassword").val()
+      };
+     // console.log(newUser.userEmail);
+     // console.log($("#userPassword").val());
+    
+      $.ajax("/database?userEmail=" + newUser.userEmail, {
+        method: "GET",
+        data: newUser
+      }).then(function(data) {
+        //console.log(data);
+        console.log("created new user");
+        if(data.result){
+          window.location.href = "http://localhost:9800/main"
+        }
+        else{
+          window.location.href = "http://localhost:9800/404"
+        }
+        //window.location.href = "http://localhost:9800/main";
+       
+      });
+    });
+
+
     $("#registerForm").on("submit", function(event) {
 
       console.log("register submitted");
@@ -27,19 +58,6 @@ $(document).ready(function () {
       });
     });
 
-    $('#signInButton').on('click',function(event){
-      var newUser = {
-        userEmail: $("#userEmail").val(),
-        userPassword: $("#userPassword").val()
-      };
-      $.ajax("/database", {
-        type: "GET",
-        data: newUser
-      }).then(function() {
-        console.log("Checked");
-      });
-
-    })
 
     $("#saveSurvey").on("click", function(event) {
 

@@ -7,7 +7,6 @@ module.exports = function(app) {
     
     res.render("register");
   });
-
   app.get("/main", function(req, res) {
     res.render("index");
   });
@@ -24,4 +23,6 @@ module.exports = function(app) {
   app.get("*", function(req, res) {
     res.render("404");
   });
+
+  
 };
