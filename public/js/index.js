@@ -1,9 +1,6 @@
-<<<<<<< HEAD
-=======
 //TODO:
 //side nav 
 
->>>>>>> aj-mainpage
 $(document).ready(function () {
   var username;
   
