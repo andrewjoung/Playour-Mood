@@ -1,5 +1,7 @@
 //TODO:
 //side nav 
+//fix bugs, sometimes it wont pause, allow for play/pause and if a new song is pressed while another song is playing,
+//allow for current song to be paused and new song to play
 
 $(document).ready(function () {
 
