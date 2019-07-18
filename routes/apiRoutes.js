@@ -9,14 +9,31 @@ var spotify = new Spotify({
 
 module.exports = function(app) {
   // Get all examples
+  function putData(){
   app.post('/database',function(req,res){
-    console.log("in route /database");
-    db.user_data.create({
-      uname:req.body.userEmail,
-      password:req.body.userPassword
-    }).then(function(postData){
-      res.json(postData);
-    });
+   
+            db.user_data.create({
+              uname:req.body.userEmail,
+              password:req.body.userPassword
+            }).then(function(postData){
+              res.json(postData);
+            });
+  
+  });
+}
+
+  app.get('/database',function(req,res){
+
+    db.user_data.findOne({where:{uname:req.body.userEmail}}).then(function(count){
+      if(count!=0){
+        console.log("Do not put");
+     
+      }
+    })
+    
+      
+     
+
   });
 
   app.put('/database',function(req,res){
@@ -38,6 +55,7 @@ module.exports = function(app) {
 
   app.get("/", function(req, res) {
     res.render("register");
+    
   });
 
   app.get("/api/examples", function(req, res) {
