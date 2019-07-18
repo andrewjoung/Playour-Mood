@@ -131,6 +131,11 @@ h1 {
 .songData {
   font-size: 13px;
 }
+
+.playbutton:hover, .likebutton:hover {
+  color:#00c851;
+}
+
 @media (min-width: 576px) {
   .modal-dialog {
       max-width: 600px;

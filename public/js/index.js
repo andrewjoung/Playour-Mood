@@ -88,8 +88,13 @@ $(document).ready(function () {
 
         var playButton = $("<i>");
         playButton.addClass('far fa-play-circle fa-lg');
-        playButton.addClass('col-4');
+        playButton.addClass('col-2');
         playButton.addClass('playbutton');
+
+        var likeButton = $("<i>");
+        likeButton.addClass('fas fa-heart fa-sm');
+        likeButton.addClass('col-2');
+        likeButton.addClass('likebutton');
 
         var songTitle = $("<p>");
         songTitle.addClass('col-4');
@@ -108,7 +113,7 @@ $(document).ready(function () {
         // songObject.isPlaying = false;
         // songObject.isPaused = true;
         // songObjectArray.push(songObject);
-        
+
         playButton.attr('data-title', dataToUse.songsToUse[i].track.name);
         playButton.attr('data-artist', dataToUse.songsToUse[i].track.artists[0].name);
         playButton.attr('data-url', dataToUse.songsToUse[i].track.preview_url);
@@ -118,7 +123,7 @@ $(document).ready(function () {
         songTitle.text(dataToUse.songsToUse[i].track.name);
         artist.text(dataToUse.songsToUse[i].track.artists[0].name);
 
-        songDiv.append(playButton).append(songTitle).append(artist).append(line);
+        songDiv.append(playButton).append(likeButton).append(songTitle).append(artist).append(line);
         modal.append(songDiv);
       }
 
@@ -137,6 +142,7 @@ $(document).ready(function () {
               $(this).attr('data-isPlaying', "true");
               $(this).attr('data-isPaused', "false");
               songIsPlaying = true;
+              $(this).attr("class", "far fa-pause-circle fa-lg col-2 playbutton");
             }).catch(error => {
               throw error;
             });
@@ -146,6 +152,7 @@ $(document).ready(function () {
           $(this).attr('data-isPaused', 'true');
           $(this).attr('data-isPlaying', 'false');
           songIsPlaying = false;
+          $(this).attr("class", "far fa-play-circle fa-lg col-2 playbutton");
         }
       });
 
