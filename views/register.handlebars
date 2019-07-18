@@ -16,7 +16,8 @@
             </small>
 
             <button class="btn btn-info my-4 btn-block" type="submit" id="registerButton">Register</button>
-            <button class="btn btn-info my-4 btn-block" type="submit" id="signInButton">Sign In</button>
+            
+           
 
             <div id="googleButtonParent">
                 <div class="g-signin2" data-onsuccess="onSignIn" data-onfailure="onFailure" data-theme="dark"></div>
@@ -27,6 +28,7 @@
                 <a href="" target="_blank">terms of service</a>
 
         </form>
+        <button class="btn btn-info my-4 btn-block" id="signIn">Sign In</button>
     </div>
 </div>
 
@@ -96,6 +98,8 @@
     var email;
     $('#surveyMain').hide();
 
+    
+
     $('#registerButton').on('click', function () {
         $('#registerMain').hide();
         $('#surveyMain').show();
@@ -131,7 +135,17 @@
           data: goggleUser
          }).then(function() {
          console.log("created new user");
-         window.location.href='';
+         $('#surveyMain').show();
+        $('#saveSurvey').on('click', function () {
+            $.each($("#chk:checked"), function () {
+                favGen.push($(this).val());
+            });
+            console.log(favGen.join(','));
+            console.log($('#rainyDayOptions option:selected').text());
+            console.log($('#cloudyDayOptions option:selected').text());
+            console.log($('#sunnyDayOptions option:selected').text());
+        })
+         
       });
    }
 
