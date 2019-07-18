@@ -90,6 +90,7 @@ h1 {
 .modal-body {
   height: 45vh;
   overflow-y:auto;
+  padding-top: 0.6rem;
 }
 
 .rainy-modal, .cloudy-modal, .sunny-modal {
@@ -110,9 +111,29 @@ h1 {
   background-image:url("../images/sunny/sunny4.jpg");
 }
 
+#columnNames {
+  font-size: 16px;
+  border-bottom: 1px solid #494949;
+  margin-bottom: 0.6rem;
+  text-align: left;
+}
+
+.columnTitle, .columnArtist {
+  color: #00c851;
+  margin-bottom: 0.4rem;
+}
+
+.songDiv {
+  padding: 6px;
+  text-align: left;
+}
+
+.songData {
+  font-size: 13px;
+}
 @media (min-width: 576px) {
   .modal-dialog {
-      max-width: 500px;
+      max-width: 600px;
       margin: 9rem auto;
   }
 }

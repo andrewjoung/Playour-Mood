@@ -32,6 +32,10 @@ $(document).ready(function () {
   } else if (window.location.pathname === "/main") {
 
     var dataToUse;
+    var songObjectArray = [];
+    var songIsPlaying = false;
+    //var player = new Audio();
+    var songAudio;
 
     $.ajax("/getweather", {type:"GET"}).then(function(data){
       console.log(data);
@@ -76,25 +80,79 @@ $(document).ready(function () {
       var modal = $("#modalBody");
 
       for(var i = 0; i < dataToUse.songsToUse.length; i++) {
+        var songObject = {};
+
         var songDiv = $("<div>");
         songDiv.addClass("songDiv");
         songDiv.addClass('row');
 
+        var playButton = $("<i>");
+        playButton.addClass('far fa-play-circle fa-lg');
+        playButton.addClass('col-4');
+        playButton.addClass('playbutton');
+
         var songTitle = $("<p>");
-        songTitle.addClass('col-6');
+        songTitle.addClass('col-4');
+        songTitle.addClass('songData');
 
         var artist = $("<p>");
-        artist.addClass('col-6');
+        artist.addClass('col-4');
+        artist.addClass('songData');
 
         var line = $("<hr>");
+
+        // songObject.songTitle = dataToUse.songsToUse[i].track.name;
+        // songObject.artistName = dataToUse.songsToUse[i].track.artists[0].name;
+        // songObject.previewUrl = dataToUse.songsToUse[i].track.preview_url;
+
+        // songObject.isPlaying = false;
+        // songObject.isPaused = true;
+        // songObjectArray.push(songObject);
+        
+        playButton.attr('data-title', dataToUse.songsToUse[i].track.name);
+        playButton.attr('data-artist', dataToUse.songsToUse[i].track.artists[0].name);
+        playButton.attr('data-url', dataToUse.songsToUse[i].track.preview_url);
+        playButton.attr('data-isPlaying', "false");
+        playButton.attr('data-isPaused', 'true');
 
         songTitle.text(dataToUse.songsToUse[i].track.name);
         artist.text(dataToUse.songsToUse[i].track.artists[0].name);
 
-        songDiv.append(songTitle).append(artist).append(line);
+        songDiv.append(playButton).append(songTitle).append(artist).append(line);
         modal.append(songDiv);
       }
+
+      $(".playbutton").on('click', function() {
+
+        console.log("play button beting clicked");
+        console.log($(this).attr('data-title'));
+        //if no other songs are playing and the clicked song is paused
+        if(!songIsPlaying && $(this).attr('data-isPaused') === 'true') {
+          console.log("entering if statement");
+          songAudio = new Audio();
+          songAudio.src = $(this).attr('data-url');
+          var playPromise = songAudio.play();
+          if(playPromise !== undefined) {
+            playPromise.then(() => {
+              $(this).attr('data-isPlaying', "true");
+              $(this).attr('data-isPaused', "false");
+              songIsPlaying = true;
+            }).catch(error => {
+              throw error;
+            });
+          }
+        } else if (songIsPlaying && $(this).attr('data-isPaused') === 'false' && $(this).attr('data-isPlaying') === 'true') {
+          songAudio.pause();
+          $(this).attr('data-isPaused', 'true');
+          $(this).attr('data-isPlaying', 'false');
+          songIsPlaying = false;
+        }
+      });
+
+      console.log(songObjectArray);
     });
+
+    //------------ end of if/else statement --------------- //
   }
 
  
