@@ -127,6 +127,9 @@ $(document).ready(function () {
         modal.append(songDiv);
       }
 
+      //TODO: 
+      //When a song is playing and you click on the other song, pause the currently playing song and play the new song
+      //Whnen a song is done playing change it back to playable and then allow for another song to be able to play
       $(".playbutton").on('click', function() {
 
         console.log("play button beting clicked");
