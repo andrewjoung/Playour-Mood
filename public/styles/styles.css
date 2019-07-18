@@ -68,3 +68,51 @@ h1 {
   padding-left: 8rem!important;
   padding-right: 8rem!important;
 }
+
+.foreground {
+  background-color:#00000085;
+}
+
+.modal-body {
+  background-color: #282828;
+  color: white;
+}
+.modal-header {
+  border-bottom: none;
+  /* box-shadow: 2px 0px 5px #000000ba; */
+  color:white;
+}
+
+.modal-dialog {
+  overflow-y: initial !important;
+}
+
+.modal-body {
+  height: 45vh;
+  overflow-y:auto;
+}
+
+.rainy-modal, .cloudy-modal, .sunny-modal {
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+.rainy-modal {
+  background-image:url('../images/rainy/rainy1.jpg');
+}
+
+.cloudy-modal {
+  background-image:url('../images/cloudy/cloudy1.jpg');
+}
+
+.sunny-modal {
+  background-image:url("../images/sunny/sunny4.jpg");
+}
+
+@media (min-width: 576px) {
+  .modal-dialog {
+      max-width: 500px;
+      margin: 9rem auto;
+  }
+}
