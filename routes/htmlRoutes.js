@@ -4,16 +4,9 @@ var axios = require('axios');
 module.exports = function(app) {
   // Load index page
   app.get("/", function(req, res) {
-    // db.Example.findAll({}).then(function(dbExamples) {
-    //   res.render("index", {
-    //     msg: "Welcome!",
-    //     examples: dbExamples
-    //   });
-    // });
-    //res.send("This will be the register page");
+    
     res.render("register");
   });
-
   app.get("/main", function(req, res) {
     res.render("index");
   });
@@ -30,4 +23,6 @@ module.exports = function(app) {
   app.get("*", function(req, res) {
     res.render("404");
   });
+
+  
 };

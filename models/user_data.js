@@ -3,7 +3,10 @@ module.exports = function(sequelize, DataTypes) {
    uname:{
      type:DataTypes.STRING,
      allowNull:false,
-     primaryKey:true
+     primaryKey:true,
+     validate:{
+       len:[1,30]
+     }
    },
    password:{
      type:DataTypes.STRING,

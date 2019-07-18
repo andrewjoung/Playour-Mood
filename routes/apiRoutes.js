@@ -9,18 +9,56 @@ var spotify = new Spotify({
 
 module.exports = function(app) {
   // Get all examples
+
   app.post('/database',function(req,res){
-    console.log("in route /database");
-    db.user_data.create({
-      uname:req.body.userEmail,
-      password:req.body.userPassword
-    }).then(function(postData){
-      res.json(postData);
-    });
+   
+            db.user_data.create({
+              uname:req.body.userEmail,
+              password:req.body.userPassword
+            }).then(function(postData){
+              res.json(postData);
+            });
+  
   });
+
+  app.get('/database',function(req,res){
+
+    console.log("In  app.get('/database',function(req,res){");
+    console.log(req.query.userEmail);
+    db.user_data.findOne({where:{uname:req.query.userEmail}}).then(function(result){
+      console.log(result==null);
+      if(result!=null){
+        res.send(200, {"result": true})
+      }
+      else{
+        res.send(404,{"result":false})
+      }
+      //res.send(200, {"result": true});
+    })
+
+
+  });
+
+  app.put('/database',function(req,res){
+    db.user_data.update(
+      {
+        fav_genre:req.body.fav_genre,
+        rainy_choices:req.body.rainy_choices,
+        cloudy_choices:req.body.cloudy_choices,
+        sunny_choices:req.body.sunny_choices
+      },{
+        where:{
+          uname:req.body.uname
+        }
+      }
+    ).then(function(userData){
+      res.json(userData);
+    })
+  })
 
   app.get("/", function(req, res) {
     res.render("register");
+    
   });
 
   app.get("/api/examples", function(req, res) {

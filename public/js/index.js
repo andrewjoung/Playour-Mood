@@ -1,22 +1,53 @@
+
 //TODO:
 //side nav 
 //fix bugs, sometimes it wont pause, allow for play/pause and if a new song is pressed while another song is playing,
 //allow for current song to be paused and new song to play
 
-$(document).ready(function () {
 
+$(document).ready(function () {
+  var username;
+  
+  
   if(window.location.pathname === "/") {
     
-    //register logic 
+   
+    
 
-    console.log("al;sjfl;adjsf");
+    $('#signIn').on("click",function(event){
+      console.log("In sign In");
+     
+      var newUser = {
+        userEmail: $("#userEmail").val(),
+        userPassword: $("#userPassword").val()
+      };
+     // console.log(newUser.userEmail);
+     // console.log($("#userPassword").val());
+    
+      $.ajax("/database?userEmail=" + newUser.userEmail, {
+        method: "GET",
+        data: newUser
+      }).then(function(data) {
+        //console.log(data);
+        console.log("created new user");
+        if(data.result){
+          window.location.href = "http://localhost:9800/main"
+        }
+        else{
+          window.location.href = "http://localhost:9800/404"
+        }
+        //window.location.href = "http://localhost:9800/main";
+       
+      });
+    });
+
 
     $("#registerForm").on("submit", function(event) {
 
       console.log("register submitted");
 
       event.preventDefault();
-      
+      username=$("#userEmail").val();
       var newUser = {
         userEmail: $("#userEmail").val(),
         userPassword: $("#userPassword").val()
@@ -32,6 +63,36 @@ $(document).ready(function () {
         console.log("created new user");
       });
     });
+
+
+    $("#saveSurvey").on("click", function(event) {
+
+      console.log("survey submitted");
+
+      event.preventDefault();
+
+      var favGen=[];
+
+      $.each($("#chk:checked"), function () {
+        favGen.push($(this).val());
+      });
+      
+      var newSurvey = {
+        uname:username,
+        fav_genre:favGen.join(','),
+        rainy_choices:$('#rainyDayOptions option:selected').text(),
+        cloudy_choices:$('#cloudyDayOptions option:selected').text(),
+        sunny_choices:$('#sunnyDayOptions option:selected').text()
+      };
+      
+      $.ajax("/database", {
+        type: "PUT",
+        data: newSurvey
+      }).then(function() {
+        console.log("created Survey");
+      });
+    });
+
 
   } else if (window.location.pathname === "/main") {
 

@@ -69,7 +69,6 @@ h1 {
   padding-right: 8rem!important;
 }
 
-
 .foreground {
 background-color:#00000085;
 }
@@ -196,3 +195,4 @@ transition: margin-right .5s;
   .sidenav {padding-top: 15px;}
   .sidenav a {font-size: 18px;}
 }
+
