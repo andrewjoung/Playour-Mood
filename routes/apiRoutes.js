@@ -54,7 +54,9 @@ module.exports = function(app) {
         fav_genre:req.body.fav_genre,
         rainy_choices:req.body.rainy_choices,
         cloudy_choices:req.body.cloudy_choices,
-        sunny_choices:req.body.sunny_choices
+        sunny_choices:req.body.sunny_choices,
+        zipcode:req.body.zipcode
+
       },{
         where:{
           uname:req.body.uname
@@ -113,6 +115,14 @@ module.exports = function(app) {
       throw error;
     });
     
+  });
+  app.post('/songs',function(req,res){
+    db.favoriteSongs.create({
+      uname:req.body.uname,
+      song:req.body.song
+    }).then(function(postData){
+      res.json(postData);
+    });
   });
 
   //TODO:

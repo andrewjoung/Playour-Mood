@@ -1,8 +1,9 @@
 //TODO:
 //side nav 
+var username;
 
 $(document).ready(function () {
-  var username;
+ 
   var userPassword;
   var fav_songs=[];
   
@@ -47,6 +48,7 @@ $(document).ready(function () {
       console.log("register submitted");
 
       event.preventDefault();
+      localStorage.setItem('username',$("#userEmail").val());
       username=$("#userEmail").val();
       var newUser = {
         userEmail: $("#userEmail").val(),
@@ -69,6 +71,10 @@ $(document).ready(function () {
     });
 
 
+    
+
+
+  } else if(window.location.pathname === "/survey"){
     $("#saveSurvey").on("click", function(event) {
 
       console.log("survey submitted");
@@ -82,11 +88,12 @@ $(document).ready(function () {
       });
       
       var newSurvey = {
-        uname:username,
+        uname:localStorage.getItem('username'),
         fav_genre:favGen.join(','),
         rainy_choices:$('#rainyDayOptions option:selected').text(),
         cloudy_choices:$('#cloudyDayOptions option:selected').text(),
-        sunny_choices:$('#sunnyDayOptions option:selected').text()
+        sunny_choices:$('#sunnyDayOptions option:selected').text(),
+        zipcode:$('#zip').val()
       };
       
       $.ajax("/database", {
@@ -98,14 +105,14 @@ $(document).ready(function () {
       });
     });
 
-
-  } else if (window.location.pathname === "/main") {
+  }else if (window.location.pathname === "/main") {
 
     var dataToUse;
     var songObjectArray = [];
     var songIsPlaying = false;
     //var player = new Audio();
     var songAudio;
+    var favSongs=[];
 
     /* Set the width of the side navigation to 250px and the left margin of the page content to 250px and add a black background color to body */
     function openNav() {
@@ -242,10 +249,27 @@ $(document).ready(function () {
            console.log("if($(this).attr('state-of-button')==='not')");
            $(this).toggleClass('fa-heart fa-heart-o');
            $(this).attr('state-of-button','yes');
+
+            var userSongs = {
+              uname: localStorage.getItem('username'),
+              song:$(this).attr('song-name')
+            };
+            $.ajax("/songs", {
+              type: "POST",
+              data: userSongs
+            }).then(function(data) {
+              console.log("Entered to database");
+              // if(data.result){
+              //   window.location.href="http://localhost:9800/alreadyUser"
+              // }else{
+              //   window.location.href="http://localhost:9800/survey"
+              // }
+            });
          }else if($(this).attr('state-of-button')=='yes'){
           console.log("else");
           $(this).toggleClass('fas fa-heart-o');
           $(this).attr('state-of-button','not');
+
          }
 
         });
