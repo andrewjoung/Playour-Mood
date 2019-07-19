@@ -124,6 +124,69 @@ module.exports = function(app) {
     });
     
   });
+
+  app.get("/getweather/:zipcode/:cloudy/:rainy/:sunny/:genre", function(req, res) {
+    var apiKey = "3157d00bf198cb3d5c714f82d8eac54f";
+    var zip = req.params.zipcode;
+
+    var queryUrl = "https://api.openweathermap.org/data/2.5/weather?zip=" + zip +  ",us&appid=" + apiKey
+    axios.get(queryUrl).then(function(data) {
+      // console.log(data.data);
+      // console.log(queryUrl);
+      //res.json(data.data);
+      //dataObject.weatherData = data.data;
+      //console.log(dataObject);
+      //var weather = dataObject.weatherData.weather[0].main;
+      //console.log(weather);
+      var weather = data.data.weather[0].main;
+      
+      //console.log(musicData);
+
+      var dataObject = {
+        weatherData: data.data,
+        //spotifyData: musicData
+      }
+
+      var sentiment = [];
+
+      if(weather.toLowerCase() === "clouds" || weather.toLowerCase() === "haze" || weather.toLowerCase() === "fog") {
+        //TODO: Change this to use User preference for cloudy weather
+        var weatherParams = req.params.cloudy;
+        console.log(weatherParams);
+        sentiment = weatherParams.split(', ');
+        console.log(sentiment);
+
+      } else if (weather.toLowerCase() === "clear") { //sunny weather
+        //TODO: Change this to user user preference for sunny weather
+        var weatherParams = req.params.sunny;
+        console.log(weatherParams);
+        sentiment = weatherParams.split(', ');
+        console.log(sentiment);
+
+      } else if (weather.toLowerCase() === "rain") {
+        //TODO: Change this to use user preference for rainy weather
+        var weatherParams = req.params.rainy;
+        console.log(weatherParams);
+        sentiment = weatherParams.split(', ');
+        console.log(sentiment);
+      }
+      
+      var genreString = req.params.genre;
+      var genreArray = genreString.split(',');
+      spotifyCall(sentiment, genreArray, dataObject, res);
+
+      //dataObject.spotifyData = data;
+      //console.log(dataObject.spotifyData);
+      //console.log(dataObject.spotifyData);
+      //console.log(dataObject.spotifyData);
+
+      //res.json(dataObject);
+      // axios.get(//spotify route)
+    }).catch(function(error){
+      throw error;
+    });
+  });
+
   app.post('/songs',function(req,res){
     db.favoriteSongs.create({
       uname:req.body.uname,
@@ -154,29 +217,36 @@ module.exports = function(app) {
 };
 
 
-function spotifyCall(weather, dataObject, res) {
+function spotifyCall(sentiment, genre, dataObject, res) {
 
-  var sentiment = [];
-  var searchQuery = "https://api.spotify.com/v1/search?q=hip-hop+"
+  //var sentiment = [];
+  // var searchQuery = "https://api.spotify.com/v1/search?q=hip-hop+"
+  var genreNum = Math.floor(Math.random() * genre.length);
+  var genreToUse = genre[genreNum];
 
-  if(weather.toLowerCase() === "clouds" || weather.toLowerCase() === "haze" || weather.toLowerCase() === "fog") {
-    //TODO: Change this to use User preference for cloudy weather
-    sentiment.push("sad");
-    sentiment.push("calm");
-    sentiment.push("mellow");
-  } else if (weather.toLowerCase() === "clear") { //sunny weather
-    //TODO: Change this to user user preference for sunny weather
-    sentiment.push("happy");
-    sentiment.push("exciting");
-    sentiment.push("uplifting");
-  } else if (weather.toLowerCase() === "rain") {
-    //TODO: Change this to use user preference for rainy weather
-    sentiment.push("sad");
-    sentiment.push("calm");
-    sentiment.push("mellow");
-  }
+  var searchQuery = "https://api.spotify.com/v1/search?q=" + genreToUse.toLowerCase() + "+"
 
-  searchQuery += sentiment[0];
+  // if(weather.toLowerCase() === "clouds" || weather.toLowerCase() === "haze" || weather.toLowerCase() === "fog") {
+  //   //TODO: Change this to use User preference for cloudy weather
+  //   sentiment.push("sad");
+  //   sentiment.push("calm");
+  //   sentiment.push("mellow");
+  // } else if (weather.toLowerCase() === "clear") { //sunny weather
+  //   //TODO: Change this to user user preference for sunny weather
+  //   sentiment.push("happy");
+  //   sentiment.push("exciting");
+  //   sentiment.push("uplifting");
+  // } else if (weather.toLowerCase() === "rain") {
+  //   //TODO: Change this to use user preference for rainy weather
+  //   sentiment.push("sad");
+  //   sentiment.push("calm");
+  //   sentiment.push("mellow");
+  // }
+
+  var randomNum = Math.floor(Math.random() * sentiment.length);
+  console.log(sentiment[randomNum]);
+  var randomSentiment = sentiment[randomNum];
+  searchQuery += randomSentiment.toLowerCase();
   //searchQuery += ("+" + sentiment[1]);
   searchQuery += "&type=playlist&limit=5"
 
