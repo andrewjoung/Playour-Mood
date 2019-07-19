@@ -84,14 +84,15 @@
             userPassword: ""
         };
         console.log("In goggle Sign in");
-        $.ajax("/database", {
+        $.ajax("/database?userEmail=" + profile.getEmail(), {
             type: "POST",
             data: goggleUser
         }).then(function () {
             console.log("created new user");
-            window.location.href = "http://localhost:9800/gsurvey";
+            window.location.href = "http://localhost:9800/survey";
 
         });
+        console.log("created new User sent to survey");
     }
 
 </script>
