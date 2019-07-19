@@ -1,6 +1,7 @@
 var db = require("../models");
 var axios = require('axios');
 var Spotify = require('node-spotify-api');
+var sequelize=require("sequelize");
 
 var spotify = new Spotify({
   id: "d551accfb0ba4db99eb755dd09d0bc0c",
@@ -11,29 +12,37 @@ module.exports = function(app) {
   // Get all examples
   
   app.post('/database',function(req,res){
-   
-            db.user_data.create({
-              uname:req.body.userEmail,
-              password:req.body.userPassword
-            }).then(function(postData){
-              res.json(postData);
-            });
+            db.user_data.findOne({where:{uname:req.query.userEmail}}).then(function(result){
+              console.log(result);
+              if(result!=null){
+                res.send({"result": true})
+              }
+              else{
+                db.user_data.create({
+                  uname:req.body.userEmail,
+                  password:req.body.userPassword
+                }).then(function(postData){
+                  res.json(postData);
+                });
+              }
+            })
+            
   
   });
-
+//{where:{[sequelize.Op.and]:[{uname:req.query.userEmail},{password:req.body.userPassword}]}}
   app.get('/database',function(req,res){
 
     console.log("In  app.get('/database',function(req,res){");
     console.log(req.query.userEmail);
-    db.user_data.findOne({where:{uname:req.query.userEmail}}).then(function(result){
+    db.user_data.findOne({where:{[sequelize.Op.and]:[{uname:req.query.userEmail},{password:req.query.userPassword}]}}).then(function(result){
       console.log(result==null);
       if(result!=null){
         res.send(200, {"result": true})
       }
       else{
-        res.send(404,{"result":false})
+        res.send({"result":false})
       }
-      //res.send(200, {"result": true});
+      
     })
 
 
