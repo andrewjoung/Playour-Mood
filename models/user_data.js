@@ -20,6 +20,7 @@ module.exports = function(sequelize, DataTypes) {
    cloudy_choices:DataTypes.TEXT,
    sunny_choices:DataTypes.TEXT,
 
+
   });
   return user_data;
 };

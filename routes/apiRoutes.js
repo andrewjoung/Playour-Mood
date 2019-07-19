@@ -9,7 +9,7 @@ var spotify = new Spotify({
 
 module.exports = function(app) {
   // Get all examples
-  function putData(){
+  
   app.post('/database',function(req,res){
    
             db.user_data.create({
@@ -20,7 +20,7 @@ module.exports = function(app) {
             });
   
   });
-}
+
 
   app.get('/database',function(req,res){
 

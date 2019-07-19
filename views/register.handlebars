@@ -19,7 +19,8 @@
             <button class="btn btn-info my-4 btn-block" type="submit" id="signInButton">Sign In</button>
 
             <div id="googleButtonParent">
-                <div class="g-signin2" data-onsuccess="onSignIn" data-onfailure="onFailure" data-theme="dark"></div>
+                <div class="g-signin2" data-onsuccess="onSignIn" data-onfailure="onFailure" data-theme="dark"
+                    data-redirecturi="http://localhost:9800/gsurvey"></div>
             </div>
             <!-- Terms of service -->
             <p>By clicking
@@ -32,7 +33,7 @@
 
 <div id="surveyMain">
     <div class="container text-center border border-light p-3" id="surveyMainContent" style="margin-top:5%">
-      <label>What genre of music do you like primarily listen to?</label>
+        <label>What genre of music do you like primarily listen to?</label>
         <div class="input-group mb-8 justify-content-center">
             <div class="input-group-prepend">
                 <div class="input-group-text">
@@ -54,8 +55,9 @@
                     Rock<br>
                 </div>
                 <div class="input-group-text">
-                    <input type="checkbox" aria-label="Checkbox for following text input" value="Grunge"id="chk">Grunge<br>
-                </div> 
+                    <input type="checkbox" aria-label="Checkbox for following text input" value="Grunge"
+                        id="chk">Grunge<br>
+                </div>
             </div>
 
         </div>
@@ -114,28 +116,28 @@
 
     function onFailure() { console.error('Failure'); }
 
-   function onSignIn(googleUser) {
-     profile = googleUser.getBasicProfile();
-    console.log("ID: " + profile.getId()); // Don't send this directly to your server!
-    console.log('Full Name: ' + profile.getName());
-    console.log('Given Name: ' + profile.getGivenName());
-    console.log('Family Name: ' + profile.getFamilyName());
-    console.log("Image URL: " + profile.getImageUrl());
-    var goggleUser = {
-         userEmail: profile.getEmail(),
-        userPassword: ""
-      };
-    console.log("In goggle Sign in");
-       $.ajax("/database", {
-          type: "POST",
-          data: goggleUser
-         }).then(function() {
-         console.log("created new user");
-         window.location.href='';
-      });
-   }
+    function onSignIn(googleUser) {
+        profile = googleUser.getBasicProfile();
+        console.log("ID: " + profile.getId()); // Don't send this directly to your server!
+        console.log('Full Name: ' + profile.getName());
+        console.log('Given Name: ' + profile.getGivenName());
+        console.log('Family Name: ' + profile.getFamilyName());
+        console.log("Image URL: " + profile.getImageUrl());
+        var goggleUser = {
+            userEmail: profile.getEmail(),
+            userPassword: ""
+        };
+        console.log("In goggle Sign in");
+        $.ajax("/database", {
+            type: "POST",
+            data: goggleUser
+        }).then(function () {
+            console.log("created new user");
+            window.location.href = "http://localhost:9800/gsurvey";
 
-    
+        });
+    }
+
 </script>
 
 <!-- Default form register -->
