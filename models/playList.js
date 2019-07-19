@@ -5,6 +5,8 @@ module.exports = function(sequelize, DataTypes) {
      cloudy_list:DataTypes.TEXT,
      sunny_list:DataTypes.TEXT,
   
+    },{
+      timestamps:false
     });
     
     return playList;

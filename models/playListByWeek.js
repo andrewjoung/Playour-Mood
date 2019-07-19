@@ -3,6 +3,8 @@ module.exports = function(sequelize, DataTypes) {
     uname:DataTypes.STRING,
      day:DataTypes.STRING,
      playList:DataTypes.STRING,
+    },{
+      timestamps:false
     });
     
     return playListByWeek;

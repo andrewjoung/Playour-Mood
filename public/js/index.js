@@ -3,6 +3,8 @@
 
 $(document).ready(function () {
   var username;
+  var userPassword;
+  var fav_songs=[];
   
   
   if(window.location.pathname === "/") {
@@ -27,6 +29,8 @@ $(document).ready(function () {
         //console.log(data);
         console.log("created new user");
         if(data.result){
+          username=newUser.userEmail;
+          userPassword=newUser.userPassword;
           window.location.href = "http://localhost:9800/main"
         }
         else{
@@ -124,6 +128,7 @@ $(document).ready(function () {
     }
 
     $("#userIcon").on('click', function() {
+      
       openNav();
       console.log("icon clicked");
     });
@@ -187,13 +192,16 @@ $(document).ready(function () {
         playButton.addClass('playbutton');
 
         var likeButton = $("<i>");
-        likeButton.addClass('fas fa-heart fa-sm');
+        likeButton.addClass('fa fa-heart-o');
         likeButton.addClass('col-2');
         likeButton.addClass('likebutton');
+        likeButton.attr('song-name',dataToUse.songsToUse[i].track.name);
+        likeButton.attr('state-of-button','not');
+  
 
         var songTitle = $("<p>");
         songTitle.addClass('col-4');
-        songTitle.addClass('songData');
+        songTitle.addClass('songTitle');
 
         var artist = $("<p>");
         artist.addClass('col-4');
@@ -221,6 +229,30 @@ $(document).ready(function () {
         songDiv.append(playButton).append(likeButton).append(songTitle).append(artist).append(line);
         modal.append(songDiv);
       }
+
+      function toggleHeart(x){
+        x.toggleClass('fa-heart fa-heart-o');
+      }
+
+      $(".likebutton").each(function(index){
+        
+        $(this).on('click',function(){
+         if($(this).attr('state-of-button')=='not'){
+           console.log("if($(this).attr('state-of-button')==='not')");
+           $(this).toggleClass('fa-heart fa-heart-o');
+           $(this).attr('state-of-button','yes');
+         }else if($(this).attr('state-of-button')=='yes'){
+          console.log("else");
+          $(this).toggleClass('fas fa-heart-o');
+          $(this).attr('state-of-button','not');
+         }
+
+        });
+        
+      });
+
+     
+     
 
       //TODO: 
       //When a song is playing and you click on the other song, pause the currently playing song and play the new song
@@ -257,6 +289,11 @@ $(document).ready(function () {
       console.log(songObjectArray);
     });
 
+
+
+
+
+
     //------------ end of if/else statement --------------- //
   }else if(window.location.pathname === "/alreadyUser"){
 
@@ -277,6 +314,8 @@ $(document).ready(function () {
         //console.log(data);
         console.log("created new user");
         if(data.result){
+          username=newUser.userEmail;
+          userPassword=newUser.userPassword;
           window.location.href = "http://localhost:9800/main"
         }
         else{
