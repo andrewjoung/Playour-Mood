@@ -1,12 +1,10 @@
-
 //TODO:
 //side nav 
-//fix bugs, sometimes it wont pause, allow for play/pause and if a new song is pressed while another song is playing,
-//allow for current song to be paused and new song to play
-
 
 $(document).ready(function () {
   var username;
+  var userPassword;
+  var fav_songs=[];
   
   
   if(window.location.pathname === "/") {
@@ -24,13 +22,15 @@ $(document).ready(function () {
      // console.log(newUser.userEmail);
      // console.log($("#userPassword").val());
     
-      $.ajax("/database?userEmail=" + newUser.userEmail, {
+      $.ajax("/database?userEmail=" + newUser.userEmail+"?userPassword="+newUser.userPassword, {
         method: "GET",
         data: newUser
       }).then(function(data) {
         //console.log(data);
         console.log("created new user");
         if(data.result){
+          username=newUser.userEmail;
+          userPassword=newUser.userPassword;
           window.location.href = "http://localhost:9800/main"
         }
         else{
@@ -56,11 +56,15 @@ $(document).ready(function () {
       console.log($("#userEmail").val());
       console.log($("#userPassword").val());
       
-      $.ajax("/database", {
+      $.ajax("/database?userEmail=" + newUser.userEmail, {
         type: "POST",
         data: newUser
-      }).then(function() {
-        console.log("created new user");
+      }).then(function(data) {
+        if(data.result){
+          window.location.href="http://localhost:9800/alreadyUser"
+        }else{
+          window.location.href="http://localhost:9800/survey"
+        }
       });
     });
 
@@ -90,6 +94,7 @@ $(document).ready(function () {
         data: newSurvey
       }).then(function() {
         console.log("created Survey");
+        window.location.href = "http://localhost:9800/main"
       });
     });
 
@@ -123,6 +128,7 @@ $(document).ready(function () {
     }
 
     $("#userIcon").on('click', function() {
+      
       openNav();
       console.log("icon clicked");
     });
@@ -186,13 +192,16 @@ $(document).ready(function () {
         playButton.addClass('playbutton');
 
         var likeButton = $("<i>");
-        likeButton.addClass('fas fa-heart fa-sm');
+        likeButton.addClass('fa fa-heart-o');
         likeButton.addClass('col-2');
         likeButton.addClass('likebutton');
+        likeButton.attr('song-name',dataToUse.songsToUse[i].track.name);
+        likeButton.attr('state-of-button','not');
+  
 
         var songTitle = $("<p>");
         songTitle.addClass('col-4');
-        songTitle.addClass('songData');
+        songTitle.addClass('songTitle');
 
         var artist = $("<p>");
         artist.addClass('col-4');
@@ -220,6 +229,31 @@ $(document).ready(function () {
         songDiv.append(playButton).append(likeButton).append(songTitle).append(artist).append(line);
         modal.append(songDiv);
       }
+
+      function toggleHeart(x){
+        x.toggleClass('fa-heart fa-heart-o');
+      }
+
+      $(".likebutton").each(function(index){
+        
+        $(this).on('click',function(){
+         if($(this).attr('state-of-button')=='not'){
+           
+           console.log("if($(this).attr('state-of-button')==='not')");
+           $(this).toggleClass('fa-heart fa-heart-o');
+           $(this).attr('state-of-button','yes');
+         }else if($(this).attr('state-of-button')=='yes'){
+          console.log("else");
+          $(this).toggleClass('fas fa-heart-o');
+          $(this).attr('state-of-button','not');
+         }
+
+        });
+        
+      });
+
+     
+     
 
       //TODO: 
       //When a song is playing and you click on the other song, pause the currently playing song and play the new song
@@ -256,7 +290,42 @@ $(document).ready(function () {
       console.log(songObjectArray);
     });
 
+
+
+
+
+
     //------------ end of if/else statement --------------- //
+  }else if(window.location.pathname === "/alreadyUser"){
+
+    $('#signIn').on("click",function(event){
+      console.log("In sign In");
+     
+      var newUser = {
+        userEmail: $("#userEmail").val(),
+        userPassword: $("#userPassword").val()
+      };
+     // console.log(newUser.userEmail);
+     // console.log($("#userPassword").val());
+    
+      $.ajax("/database?userEmail=" + newUser.userEmail+"?userPassword="+newUser.userPassword, {
+        method: "GET",
+        data: newUser
+      }).then(function(data) {
+        //console.log(data);
+        console.log("created new user");
+        if(data.result){
+          username=newUser.userEmail;
+          userPassword=newUser.userPassword;
+          window.location.href = "http://localhost:9800/main"
+        }
+        else{
+          window.location.href = "http://localhost:9800/404"
+        }
+        //window.location.href = "http://localhost:9800/main";
+       
+      });
+    });
   }
 
  

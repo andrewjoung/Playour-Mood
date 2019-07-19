@@ -19,7 +19,10 @@ module.exports = function(sequelize, DataTypes) {
    rainy_choices:DataTypes.TEXT,
    cloudy_choices:DataTypes.TEXT,
    sunny_choices:DataTypes.TEXT,
+   zipcode:DataTypes.STRING
 
+  },{
+    timestamps:false
   });
   return user_data;
 };
