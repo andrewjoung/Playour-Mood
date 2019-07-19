@@ -1,5 +1,6 @@
 //TODO:
 //side nav 
+var username;
 
 $(document).ready(function () {
   
@@ -50,6 +51,7 @@ $(document).ready(function () {
       console.log("register submitted");
 
       event.preventDefault();
+      localStorage.setItem('username',$("#userEmail").val());
       username=$("#userEmail").val();
       var newUser = {
         userEmail: $("#userEmail").val(),
@@ -88,12 +90,12 @@ $(document).ready(function () {
       });
       
       var newSurvey = {
-        uname:localStorage.getItem("username"),
+        uname:localStorage.getItem('username'),
         fav_genre:favGen.join(','),
         rainy_choices:$('#rainyDayOptions option:selected').text(),
         cloudy_choices:$('#cloudyDayOptions option:selected').text(),
         sunny_choices:$('#sunnyDayOptions option:selected').text(),
-        //zipcode:$()
+        zipcode:$('#zip').val()
       };
       
       $.ajax("/database", {
@@ -112,6 +114,7 @@ $(document).ready(function () {
     var songIsPlaying = false;
     //var player = new Audio();
     var songAudio;
+    var favSongs=[];
 
     console.log(localStorage.getItem("username"));
     var specificUser = localStorage.getItem("username");
@@ -292,10 +295,27 @@ $(document).ready(function () {
            console.log("if($(this).attr('state-of-button')==='not')");
            $(this).toggleClass('fa-heart fa-heart-o');
            $(this).attr('state-of-button','yes');
+
+            var userSongs = {
+              uname: localStorage.getItem('username'),
+              song:$(this).attr('song-name')
+            };
+            $.ajax("/songs", {
+              type: "POST",
+              data: userSongs
+            }).then(function(data) {
+              console.log("Entered to database");
+              // if(data.result){
+              //   window.location.href="http://localhost:9800/alreadyUser"
+              // }else{
+              //   window.location.href="http://localhost:9800/survey"
+              // }
+            });
          }else if($(this).attr('state-of-button')=='yes'){
           console.log("else");
           $(this).toggleClass('fas fa-heart-o');
           $(this).attr('state-of-button','not');
+
          }
 
         });
