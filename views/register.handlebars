@@ -1,0 +1,106 @@
+<div id="registerMain">
+    <div id="registerMainContent" class="container">
+        <!-- Default form register -->
+        <h1 id="appTitle">Pla<span class="your">your</span> Mood</h1>
+
+        <form id="registerForm" class="text-center border border-light p-5" action="#!">
+
+            <p class="h4 mb-4" id="welcome">Sign In / Register</p>
+
+            <!-- E-mail -->
+            <input type="email" class="form-control mb-4" placeholder="E-mail" id="userEmail">
+
+            <!-- Password -->
+            <input type="password" class="form-control" placeholder="Password"
+                aria-describedby="defaultRegisterFormPasswordHelpBlock" id="userPassword">
+            <small id="defaultRegisterFormPasswordHelpBlock" class="form-text text-muted mb-4">
+                At least 8 characters and 1 digit
+            </small>
+
+            <div class="row">
+                <div class="col-6">
+                    <button class="btn btn-info my-4 btn-block registerButtons" id="signIn">Sign In</button>
+                </div>
+
+                <div class="col-6">
+                    <button class="btn btn-info my-4 btn-block registerButtons" type="submit"
+                        id="registerButton">Register</button>
+                </div>
+            </div>
+
+            <div id="googleButtonParent">
+                <div class="g-signin2" data-onsuccess="onSignIn" data-onfailure="onFailure" data-theme="dark"></div>
+            </div>
+            <!-- Terms of service -->
+            <p id="agreeTerms">By clicking
+                <em>Sign up</em> you agree to our
+                <a href="" target="_blank" class="greenText">terms of service</a>
+
+        </form>
+        {{!-- <button class="btn btn-info my-4 btn-block" id="signIn">Sign In</button> --}}
+    </div>
+</div>
+
+
+
+<script>
+    var favGen = [];
+    var email;
+    /** $('#surveyMain').hide(); */
+
+
+    /*
+    $('#registerButton').on('click', function () {
+        $('#registerMain').hide();
+        $('#surveyMain').show();
+
+        $('#saveSurvey').on('click', function () {
+            $.each($("#chk:checked"), function () {
+                favGen.push($(this).val());
+            });
+            console.log(favGen.join(','));
+            console.log($('#rainyDayOptions option:selected').text());
+            console.log($('#cloudyDayOptions option:selected').text());
+            console.log($('#sunnyDayOptions option:selected').text());
+        })
+
+
+    });*/
+
+
+    function onFailure() { console.error('Failure'); }
+
+    function onSignIn(googleUser) {
+        profile = googleUser.getBasicProfile();
+        console.log("ID: " + profile.getId()); // Don't send this directly to your server!
+        console.log('Full Name: ' + profile.getName());
+        console.log('Given Name: ' + profile.getGivenName());
+        console.log('Family Name: ' + profile.getFamilyName());
+        console.log("Image URL: " + profile.getImageUrl());
+        console.log("Email: " + profile.getEmail());
+        var goggleUser = {
+            userEmail: profile.getEmail(),
+            userPassword: ""
+        };
+        console.log("In goggle Sign in");
+        $.ajax("/database?userEmail=" + profile.getEmail(), {
+            type: "POST",
+            data: goggleUser
+        }).then(function (data) {
+            if (data.result) {
+                window.location.href = "http://localhost:9800/main";
+            } else {
+                localStorage.clear();
+                localStorage.setItem("username", profile.getEmail());
+                window.location.href = "http://localhost:9800/survey";
+
+            }
+
+
+        });
+        console.log("created new User sent to survey");
+    }
+
+</script>
+
+<!-- Default form register -->

@@ -1,33 +1,58 @@
-<div id="home">
-  <div class="container">
-    <div class="row">
-      <div class="col-8 offset-2">
-        <h1>{{msg}}</h1>
-        <h2>This is our Home Page!</h2>
-        <form class="clearfix mb-4" action="POST">
-          <div class="form-group">
-            <label for="example-text">Example Text</label>
-            <input type="text" id="example-text" class="form-control" aria-describedby="example-text" placeholder="Enter Example Text">
+
+<div id="coverDiv">
+
+  <div id="mySidenav" class="sidenav">
+    <a href="javascript:void(0)" class="closebtn">&times;</a>
+    <a href="#" class="sideNavOption" id="sunny">Sunny</a>
+    <a href="#" class="sideNavOption" id="cloudy">Cloudy</a>
+    <a href="#" class="sideNavOption" id="rainy">Rainy</a>
+    <a href="#" class="sideNavOption">Settings</a>
+  </div>
+  <!-- As a heading -->
+  <nav id="navbar" class="navbar">
+    <span id="appName" class="navbar-brand">Pla<span class="your">your</span> Mood</span>
+    <i id="userIcon" class="fas fa-user fa-lg"></i>
+  </nav>
+
+  <div id="mainContent">
+    <h1 id="location"></h1>
+    <i id="weatherIcon"></i>
+    <h2 id="weather"></h2>
+    <h2 id="temp"></h2>
+    <button type="button" id="playlistButton" class="btn btn-success" data-toggle="modal" data-target="#playlistModal">View Playlist</button>
+
+    <!-- Modal -->
+    <div class="modal fade" id="playlistModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+      aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="foreground">
+            <div class="modal-header" id="modalHeader">
+
+              <h5 class="modal-title" id="exampleModalLabel">Daily Playlist</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+
+            </div>
           </div>
-          <div class="form-group">
-            <label for="example-description">Example Description</label>
-            <textarea class="form-control" id="example-description" aria-describedby="example-description" placeholder="Enter Example Description"></textarea>
+          <div class="modal-body" id="modalBody">
+            <div id="columnNames" class="row">
+              <p class="col-4"></p>
+              <p class="col-4 columnTitle">Title</p>
+              <p class="col-4 columnArtist">Artist</p>   
+            </div>
           </div>
-          <button id="submit" class="btn btn-primary float-right">Submit</button>
-        </form>
-        <h3>Examples:</h3>
-        <ul id="example-list" class="list-group">
-          {{#each examples}}
-          <li data-id="{{this.id}}" class="list-group-item">
-            <a href="example/{{this.id}}">{{this.text}}</a>
-            <button class="btn btn-danger float-right delete">ｘ</button>
-          </li>
-          {{/each}}
-        </ul>
+          {{!-- <div class="modal-footer">
+            <button type="button" class="btn btn-primary">Save changes</button>
+          </div> --}}
+        </div>
       </div>
     </div>
+
   </div>
 </div>
 
-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-<script src="/js/index.js"></script>
+
+{{!-- <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="/js/index.js"></script> --}}

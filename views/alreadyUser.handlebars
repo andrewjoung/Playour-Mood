@@ -1,0 +1,33 @@
+<div id="registerMain">
+    <div id="registerMainContent" class="container">
+        <!-- Default form register -->
+        <form id="registerForm" class="text-center border border-light p-5" action="#!">
+            <p style="color: red">Already singed up!</p>
+            <p class="h4 mb-4">Sign In</p>
+
+            <!-- E-mail -->
+            <input type="email" class="form-control mb-4" placeholder="E-mail" id="userEmail">
+
+            <!-- Password -->
+            <input type="password" class="form-control" placeholder="Password"
+                aria-describedby="defaultRegisterFormPasswordHelpBlock" id="userPassword">
+            <small id="defaultRegisterFormPasswordHelpBlock" class="form-text text-muted mb-4">
+                At least 8 characters and 1 digit
+            </small>
+
+            <button class="btn btn-info my-4 btn-block" id="signIn">Sign In</button>
+            
+           
+
+            <div id="googleButtonParent">
+                <div class="g-signin2" data-onsuccess="onSignIn" data-onfailure="onFailure" data-theme="dark"></div>
+            </div>
+            <!-- Terms of service -->
+            <p>By clicking
+                <em>Sign up</em> you agree to our
+                <a href="" target="_blank">terms of service</a>
+
+        </form>
+        
+    </div>
+</div>
