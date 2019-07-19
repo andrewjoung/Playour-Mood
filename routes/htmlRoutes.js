@@ -18,6 +18,7 @@ module.exports = function(app) {
   app.get("/survey", function(req, res) {
     res.render("survey");
   });
+  
   app.get("/alreadyUser", function(req, res) {
     res.render("alreadyUser");
   });

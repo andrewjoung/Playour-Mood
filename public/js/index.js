@@ -1,7 +1,9 @@
 //TODO:
 //side nav 
+var username;
 
 $(document).ready(function () {
+  
   var username;
   var userPassword;
   var fav_songs=[];
@@ -31,6 +33,8 @@ $(document).ready(function () {
         if(data.result){
           username=newUser.userEmail;
           userPassword=newUser.userPassword;
+          localStorage.clear();
+          localStorage.setItem("username", username);
           window.location.href = "http://localhost:9800/main"
         }
         else{
@@ -47,6 +51,7 @@ $(document).ready(function () {
       console.log("register submitted");
 
       event.preventDefault();
+      localStorage.setItem('username',$("#userEmail").val());
       username=$("#userEmail").val();
       var newUser = {
         userEmail: $("#userEmail").val(),
@@ -63,12 +68,15 @@ $(document).ready(function () {
         if(data.result){
           window.location.href="http://localhost:9800/alreadyUser"
         }else{
-          window.location.href="http://localhost:9800/survey"
+          localStorage.clear();
+          localStorage.setItem("username", username);
+          window.location.href="http://localhost:9800/survey";
         }
       });
     });
 
-
+  } else if (window.location.pathname === "/survey") {
+    
     $("#saveSurvey").on("click", function(event) {
 
       console.log("survey submitted");
@@ -82,22 +90,22 @@ $(document).ready(function () {
       });
       
       var newSurvey = {
-        uname:username,
+        uname:localStorage.getItem('username'),
         fav_genre:favGen.join(','),
         rainy_choices:$('#rainyDayOptions option:selected').text(),
         cloudy_choices:$('#cloudyDayOptions option:selected').text(),
-        sunny_choices:$('#sunnyDayOptions option:selected').text()
+        sunny_choices:$('#sunnyDayOptions option:selected').text(),
+        zipcode:$('#zip').val()
       };
       
       $.ajax("/database", {
         type: "PUT",
         data: newSurvey
-      }).then(function() {
+      }).then(function(data) {
         console.log("created Survey");
         window.location.href = "http://localhost:9800/main"
       });
     });
-
 
   } else if (window.location.pathname === "/main") {
 
@@ -106,6 +114,51 @@ $(document).ready(function () {
     var songIsPlaying = false;
     //var player = new Audio();
     var songAudio;
+    var favSongs=[];
+
+    console.log(localStorage.getItem("username"));
+    var specificUser = localStorage.getItem("username");
+
+    $.ajax("/database/" + specificUser, {type:"GET"}).then(function(data){
+      //console.log("User data" + data);
+      console.log(data);
+      
+      $.ajax("/getweather", {type:"GET"}).then(function(data){
+        console.log(data);
+        console.log(data.weatherData.weather[0].main);
+  
+        dataToUse = data;
+        //console.log(data.spotifyData.playlists);
+        //console.log(data.spotifyData);
+        //console.log(data.spotifyData);
+        console.log(data.spotifyData);
+        var weather = data.weatherData.weather[0].main;
+        // var weather = "clear";
+        var randomNum = Math.floor((Math.random() * 4) + 1);
+        var tempK = data.weatherData.main.temp;
+        var tempF = ((tempK - 273.15) * 9) / 5 + 32;
+        console.log(tempF);
+        console.log(window.location);
+        if(weather.toLowerCase() === "clouds" || weather.toLowerCase() === "haze" || weather.toLowerCase() === "fog") {
+          console.log("entering cloud if");
+          $('body').css("background-image", "url(../images/cloudy/cloudy" + randomNum + ".jpg)");
+          $('#modalHeader').addClass('cloudy-modal');
+          $("#weatherIcon").addClass("fas fa-cloud fa-5x");
+        } else if (weather.toLowerCase() === "clear") { //sunny weather
+          $('body').css("background-image", "url(../images/sunny/sunny" + randomNum + ".jpg)");
+          $('#modalHeader').addClass('sunny-modal');
+          $("#weatherIcon").addClass("fas fa-sun fa-5x");
+        } else if (weather.toLowerCase() === "rain") {
+          $('body').css("background-image", "url(../images/rainy/rainy" + randomNum + ".jpg)");
+          $('#modalHeader').addClass('rainy-modal');
+          $("#weatherIcon").addClass("fas fa-cloud-showers-heavy fa-5x");
+        }
+  
+        $("#location").text(data.weatherData.name);
+        $("#weather").text(weather);
+        $("#temp").text(Math.floor(tempF) + String.fromCharCode(176)+"F");
+      });
+    });
 
     /* Set the width of the side navigation to 250px and the left margin of the page content to 250px and add a black background color to body */
     function openNav() {
@@ -137,41 +190,41 @@ $(document).ready(function () {
         closeNav();
     });
 
-    $.ajax("/getweather", {type:"GET"}).then(function(data){
-      console.log(data);
-      console.log(data.weatherData.weather[0].main);
+    // $.ajax("/getweather", {type:"GET"}).then(function(data){
+    //   console.log(data);
+    //   console.log(data.weatherData.weather[0].main);
 
-      dataToUse = data;
-      //console.log(data.spotifyData.playlists);
-      //console.log(data.spotifyData);
-      //console.log(data.spotifyData);
-      console.log(data.spotifyData);
-      var weather = data.weatherData.weather[0].main;
-      // var weather = "clear";
-      var randomNum = Math.floor((Math.random() * 4) + 1);
-      var tempK = data.weatherData.main.temp;
-      var tempF = ((tempK - 273.15) * 9) / 5 + 32;
-      console.log(tempF);
-      console.log(window.location);
-      if(weather.toLowerCase() === "clouds" || weather.toLowerCase() === "haze" || weather.toLowerCase() === "fog") {
-        console.log("entering cloud if");
-        $('body').css("background-image", "url(../images/cloudy/cloudy" + randomNum + ".jpg)");
-        $('#modalHeader').addClass('cloudy-modal');
-        $("#weatherIcon").addClass("fas fa-cloud fa-5x");
-      } else if (weather.toLowerCase() === "clear") { //sunny weather
-        $('body').css("background-image", "url(../images/sunny/sunny" + randomNum + ".jpg)");
-        $('#modalHeader').addClass('sunny-modal');
-        $("#weatherIcon").addClass("fas fa-sun fa-5x");
-      } else if (weather.toLowerCase() === "rain") {
-        $('body').css("background-image", "url(../images/rainy/rainy" + randomNum + ".jpg)");
-        $('#modalHeader').addClass('rainy-modal');
-        $("#weatherIcon").addClass("fas fa-cloud-showers-heavy fa-5x");
-      }
+    //   dataToUse = data;
+    //   //console.log(data.spotifyData.playlists);
+    //   //console.log(data.spotifyData);
+    //   //console.log(data.spotifyData);
+    //   console.log(data.spotifyData);
+    //   var weather = data.weatherData.weather[0].main;
+    //   // var weather = "clear";
+    //   var randomNum = Math.floor((Math.random() * 4) + 1);
+    //   var tempK = data.weatherData.main.temp;
+    //   var tempF = ((tempK - 273.15) * 9) / 5 + 32;
+    //   console.log(tempF);
+    //   console.log(window.location);
+    //   if(weather.toLowerCase() === "clouds" || weather.toLowerCase() === "haze" || weather.toLowerCase() === "fog") {
+    //     console.log("entering cloud if");
+    //     $('body').css("background-image", "url(../images/cloudy/cloudy" + randomNum + ".jpg)");
+    //     $('#modalHeader').addClass('cloudy-modal');
+    //     $("#weatherIcon").addClass("fas fa-cloud fa-5x");
+    //   } else if (weather.toLowerCase() === "clear") { //sunny weather
+    //     $('body').css("background-image", "url(../images/sunny/sunny" + randomNum + ".jpg)");
+    //     $('#modalHeader').addClass('sunny-modal');
+    //     $("#weatherIcon").addClass("fas fa-sun fa-5x");
+    //   } else if (weather.toLowerCase() === "rain") {
+    //     $('body').css("background-image", "url(../images/rainy/rainy" + randomNum + ".jpg)");
+    //     $('#modalHeader').addClass('rainy-modal');
+    //     $("#weatherIcon").addClass("fas fa-cloud-showers-heavy fa-5x");
+    //   }
 
-      $("#location").text(data.weatherData.name);
-      $("#weather").text(weather);
-      $("#temp").text(Math.floor(tempF) + String.fromCharCode(176)+"F");
-    });
+    //   $("#location").text(data.weatherData.name);
+    //   $("#weather").text(weather);
+    //   $("#temp").text(Math.floor(tempF) + String.fromCharCode(176)+"F");
+    // });
     
     //TODO:
     //Spotify API call
@@ -242,10 +295,27 @@ $(document).ready(function () {
            console.log("if($(this).attr('state-of-button')==='not')");
            $(this).toggleClass('fa-heart fa-heart-o');
            $(this).attr('state-of-button','yes');
+
+            var userSongs = {
+              uname: localStorage.getItem('username'),
+              song:$(this).attr('song-name')
+            };
+            $.ajax("/songs", {
+              type: "POST",
+              data: userSongs
+            }).then(function(data) {
+              console.log("Entered to database");
+              // if(data.result){
+              //   window.location.href="http://localhost:9800/alreadyUser"
+              // }else{
+              //   window.location.href="http://localhost:9800/survey"
+              // }
+            });
          }else if($(this).attr('state-of-button')=='yes'){
           console.log("else");
           $(this).toggleClass('fas fa-heart-o');
           $(this).attr('state-of-button','not');
+
          }
 
         });

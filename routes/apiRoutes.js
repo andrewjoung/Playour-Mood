@@ -1,7 +1,7 @@
 var db = require("../models");
 var axios = require('axios');
 var Spotify = require('node-spotify-api');
-var sequelize = require("sequelize");
+var sequelize = require('sequelize');
 
 var spotify = new Spotify({
   id: "d551accfb0ba4db99eb755dd09d0bc0c",
@@ -10,54 +10,64 @@ var spotify = new Spotify({
 
 module.exports = function (app) {
   // Get all examples
-
-  app.post('/database', function (req, res) {
-    db.user_data.findOne({ where: { uname: req.query.userEmail } }).then(function (result) {
+  app.post('/database',function(req,res){
+    db.user_data.findOne({where:{uname:req.query.userEmail}}).then(function(result){
       console.log(result);
-      if (result != null) {
-        res.send({ "result": true })
+      if(result!=null){
+        res.send({"result": true})
       }
-      else {
+      else{
         db.user_data.create({
-          uname: req.body.userEmail,
-          password: req.body.userPassword
-        }).then(function (postData) {
+          uname:req.body.userEmail,
+          password:req.body.userPassword
+        }).then(function(postData){
           res.json(postData);
         });
       }
     })
-
+    
 
   });
   //{where:{[sequelize.Op.and]:[{uname:req.query.userEmail},{password:req.body.userPassword}]}}
-  app.get('/database', function (req, res) {
+  app.get('/database',function(req,res){
 
     console.log("In  app.get('/database',function(req,res){");
     console.log(req.query.userEmail);
-    db.user_data.findOne({ where: { [sequelize.Op.and]: [{ uname: req.query.userEmail }, { password: req.query.userPassword }] } }).then(function (result) {
-      console.log(result == null);
-      if (result != null) {
-        res.send(200, { "result": true })
-      }
-      else {
-        res.send({ "result": false })
+    db.user_data.findOne({where:{[sequelize.Op.and]:[{uname:req.query.userEmail},{password:req.query.userPassword}]}}).then(function(result){
+      console.log(result==null);
+      if(result!=null){
+        res.send(200, {"result": true})
+      }else{
+        res.send({"result":false})
       }
 
-    })
+    });
 
+
+  });
+
+  app.get('/database/:user', function(req, res){
+
+    var username = req.params.user;
+
+    db.user_data.findOne({where:{uname: username}}).then(function(result){
+      res.json(result);
+    });
 
   });
 
   app.put('/database', function (req, res) {
     db.user_data.update(
       {
-        fav_genre: req.body.fav_genre,
-        rainy_choices: req.body.rainy_choices,
-        cloudy_choices: req.body.cloudy_choices,
-        sunny_choices: req.body.sunny_choices
-      }, {
-        where: {
-          uname: req.body.uname
+        fav_genre:req.body.fav_genre,
+        rainy_choices:req.body.rainy_choices,
+        cloudy_choices:req.body.cloudy_choices,
+        sunny_choices:req.body.sunny_choices,
+        zipcode:req.body.zipcode
+
+      },{
+        where:{
+          uname:req.body.uname
         }
       }
     ).then(function (userData) {
@@ -113,6 +123,14 @@ module.exports = function (app) {
       throw error;
     });
 
+  });
+  app.post('/songs',function(req,res){
+    db.favoriteSongs.create({
+      uname:req.body.uname,
+      song:req.body.song
+    }).then(function(postData){
+      res.json(postData);
+    });
   });
 
   //TODO:
