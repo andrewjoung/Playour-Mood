@@ -1,6 +1,13 @@
 
 <div id="coverDiv">
 
+  <div id="mySidenav" class="sidenav">
+    <a href="javascript:void(0)" class="closebtn">&times;</a>
+    <a href="#" class="sideNavOption">Sunny</a>
+    <a href="#" class="sideNavOption">Cloudy</a>
+    <a href="#" class="sideNavOption">Rainy</a>
+    <a href="#" class="sideNavOption">Settings</a>
+  </div>
   <!-- As a heading -->
   <nav id="navbar" class="navbar">
     <span id="appName" class="navbar-brand">Pla<span class="your">your</span> Mood</span>
@@ -12,7 +19,37 @@
     <i id="weatherIcon"></i>
     <h2 id="weather"></h2>
     <h2 id="temp"></h2>
-    <button type="button" id="playlistButton" class="btn btn-success">View Playlist</button>
+    <button type="button" id="playlistButton" class="btn btn-success" data-toggle="modal" data-target="#playlistModal">View Playlist</button>
+
+    <!-- Modal -->
+    <div class="modal fade" id="playlistModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+      aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="foreground">
+            <div class="modal-header" id="modalHeader">
+
+              <h5 class="modal-title" id="exampleModalLabel">Daily Playlist</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+
+            </div>
+          </div>
+          <div class="modal-body" id="modalBody">
+            <div id="columnNames" class="row">
+              <p class="col-4"></p>
+              <p class="col-4 columnTitle">Title</p>
+              <p class="col-4 columnArtist">Artist</p>   
+            </div>
+          </div>
+          {{!-- <div class="modal-footer">
+            <button type="button" class="btn btn-primary">Save changes</button>
+          </div> --}}
+        </div>
+      </div>
+    </div>
+
   </div>
 </div>
 

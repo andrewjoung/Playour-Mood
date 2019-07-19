@@ -5,7 +5,7 @@ USE playour_mood_db;
 
 CREATE TABLE user_data(
 	uid INT NOT NULL AUTO_INCREMENT,
-    uname VARCHAR(15),
+    uname VARCHAR(50),
     password VARCHAR(16),
     fav_genre TEXT ,
     rainy_choices TEXT,

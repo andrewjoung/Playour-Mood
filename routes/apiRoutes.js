@@ -21,18 +21,21 @@ module.exports = function(app) {
   
   });
 
-
   app.get('/database',function(req,res){
 
-    db.user_data.findOne({where:{uname:req.body.userEmail}}).then(function(count){
-      if(count!=0){
-        console.log("Do not put");
-     
+    console.log("In  app.get('/database',function(req,res){");
+    console.log(req.query.userEmail);
+    db.user_data.findOne({where:{uname:req.query.userEmail}}).then(function(result){
+      console.log(result==null);
+      if(result!=null){
+        res.send(200, {"result": true})
       }
+      else{
+        res.send(404,{"result":false})
+      }
+      //res.send(200, {"result": true});
     })
-    
-      
-     
+
 
   });
 
