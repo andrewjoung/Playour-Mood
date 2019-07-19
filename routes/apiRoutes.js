@@ -2,10 +2,11 @@ var db = require("../models");
 var axios = require('axios');
 var Spotify = require('node-spotify-api');
 var sequelize = require('sequelize');
+require('dotenv').config();
 
 var spotify = new Spotify({
-  id: "d551accfb0ba4db99eb755dd09d0bc0c",
-  secret: "398b1703348c4ef2a7f8905e6c4178a1"
+  id: process.env.SPOTIFY_ID,
+  secret: process.env.SPOTIFY_SECRET
 });
 
 module.exports = function(app) {
