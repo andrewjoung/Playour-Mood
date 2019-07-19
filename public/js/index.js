@@ -1,8 +1,5 @@
-<<<<<<< HEAD
-=======
 //TODO:
 //side nav 
->>>>>>> a8039c968374699e3fe42f2f654ab293509a3ec3
 
 $(document).ready(function () {
   var username;
@@ -23,7 +20,7 @@ $(document).ready(function () {
      // console.log(newUser.userEmail);
      // console.log($("#userPassword").val());
     
-      $.ajax("/database?userEmail=" + newUser.userEmail, {
+      $.ajax("/database?userEmail=" + newUser.userEmail+"?userPassword="+newUser.userPassword, {
         method: "GET",
         data: newUser
       }).then(function(data) {
@@ -55,11 +52,15 @@ $(document).ready(function () {
       console.log($("#userEmail").val());
       console.log($("#userPassword").val());
       
-      $.ajax("/database", {
+      $.ajax("/database?userEmail=" + newUser.userEmail, {
         type: "POST",
         data: newUser
-      }).then(function() {
-        console.log("created new user");
+      }).then(function(data) {
+        if(data.result){
+          window.location.href="http://localhost:9800/alreadyUser"
+        }else{
+          window.location.href="http://localhost:9800/survey"
+        }
       });
     });
 
@@ -89,6 +90,7 @@ $(document).ready(function () {
         data: newSurvey
       }).then(function() {
         console.log("created Survey");
+        window.location.href = "http://localhost:9800/main"
       });
     });
 
@@ -256,6 +258,34 @@ $(document).ready(function () {
     });
 
     //------------ end of if/else statement --------------- //
+  }else if(window.location.pathname === "/alreadyUser"){
+
+    $('#signIn').on("click",function(event){
+      console.log("In sign In");
+     
+      var newUser = {
+        userEmail: $("#userEmail").val(),
+        userPassword: $("#userPassword").val()
+      };
+     // console.log(newUser.userEmail);
+     // console.log($("#userPassword").val());
+    
+      $.ajax("/database?userEmail=" + newUser.userEmail+"?userPassword="+newUser.userPassword, {
+        method: "GET",
+        data: newUser
+      }).then(function(data) {
+        //console.log(data);
+        console.log("created new user");
+        if(data.result){
+          window.location.href = "http://localhost:9800/main"
+        }
+        else{
+          window.location.href = "http://localhost:9800/404"
+        }
+        //window.location.href = "http://localhost:9800/main";
+       
+      });
+    });
   }
 
  
