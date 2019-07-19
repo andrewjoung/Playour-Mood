@@ -88,11 +88,11 @@
             data: goggleUser
         }).then(function (data) {
             if (data.result) {
-                window.location.href = "http://localhost:9800/main";
+                window.location.href = "/main";
             } else {
                 localStorage.clear();
                 localStorage.setItem("username", profile.getEmail());
-                window.location.href = "http://localhost:9800/survey";
+                window.location.href = "/survey";
 
             }
 
