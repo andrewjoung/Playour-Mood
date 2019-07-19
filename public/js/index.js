@@ -35,10 +35,10 @@ $(document).ready(function () {
           userPassword=newUser.userPassword;
           localStorage.clear();
           localStorage.setItem("username", username);
-          window.location.href = "http://localhost:9800/main"
+          window.location.href = "/main"
         }
         else{
-          window.location.href = "http://localhost:9800/404"
+          window.location.href = "/404"
         }
         //window.location.href = "http://localhost:9800/main";
        
@@ -66,11 +66,11 @@ $(document).ready(function () {
         data: newUser
       }).then(function(data) {
         if(data.result){
-          window.location.href="http://localhost:9800/alreadyUser"
+          window.location.href="/alreadyUser"
         }else{
           localStorage.clear();
           localStorage.setItem("username", username);
-          window.location.href="http://localhost:9800/survey";
+          window.location.href="/survey";
         }
       });
     });
@@ -103,7 +103,7 @@ $(document).ready(function () {
         data: newSurvey
       }).then(function(data) {
         console.log("created Survey");
-        window.location.href = "http://localhost:9800/main"
+        window.location.href = "/main"
       });
     });
 
@@ -235,42 +235,6 @@ $(document).ready(function () {
         
       });
     });
-
-    // $.ajax("/getweather", {type:"GET"}).then(function(data){
-    //   console.log(data);
-    //   console.log(data.weatherData.weather[0].main);
-
-    //   dataToUse = data;
-    //   //console.log(data.spotifyData.playlists);
-    //   //console.log(data.spotifyData);
-    //   //console.log(data.spotifyData);
-    //   console.log(data.spotifyData);
-    //   var weather = data.weatherData.weather[0].main;
-    //   // var weather = "clear";
-    //   var randomNum = Math.floor((Math.random() * 4) + 1);
-    //   var tempK = data.weatherData.main.temp;
-    //   var tempF = ((tempK - 273.15) * 9) / 5 + 32;
-    //   console.log(tempF);
-    //   console.log(window.location);
-    //   if(weather.toLowerCase() === "clouds" || weather.toLowerCase() === "haze" || weather.toLowerCase() === "fog") {
-    //     console.log("entering cloud if");
-    //     $('body').css("background-image", "url(../images/cloudy/cloudy" + randomNum + ".jpg)");
-    //     $('#modalHeader').addClass('cloudy-modal');
-    //     $("#weatherIcon").addClass("fas fa-cloud fa-5x");
-    //   } else if (weather.toLowerCase() === "clear") { //sunny weather
-    //     $('body').css("background-image", "url(../images/sunny/sunny" + randomNum + ".jpg)");
-    //     $('#modalHeader').addClass('sunny-modal');
-    //     $("#weatherIcon").addClass("fas fa-sun fa-5x");
-    //   } else if (weather.toLowerCase() === "rain") {
-    //     $('body').css("background-image", "url(../images/rainy/rainy" + randomNum + ".jpg)");
-    //     $('#modalHeader').addClass('rainy-modal');
-    //     $("#weatherIcon").addClass("fas fa-cloud-showers-heavy fa-5x");
-    //   }
-
-    //   $("#location").text(data.weatherData.name);
-    //   $("#weather").text(weather);
-    //   $("#temp").text(Math.floor(tempF) + String.fromCharCode(176)+"F");
-    // });
     
     //TODO:
     //Spotify API call
@@ -478,10 +442,10 @@ $(document).ready(function () {
         if(data.result){
           username=newUser.userEmail;
           userPassword=newUser.userPassword;
-          window.location.href = "http://localhost:9800/main"
+          window.location.href = "/main"
         }
         else{
-          window.location.href = "http://localhost:9800/404"
+          window.location.href = "/404"
         }
         //window.location.href = "http://localhost:9800/main";
        
