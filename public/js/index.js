@@ -35,10 +35,10 @@ $(document).ready(function () {
           userPassword=newUser.userPassword;
           localStorage.clear();
           localStorage.setItem("username", username);
-          window.location.href = "http://localhost:9800/main"
+          window.location.href = "/main"
         }
         else{
-          window.location.href = "http://localhost:9800/404"
+          window.location.href = "/404"
         }
         //window.location.href = "http://localhost:9800/main";
        
@@ -66,11 +66,11 @@ $(document).ready(function () {
         data: newUser
       }).then(function(data) {
         if(data.result){
-          window.location.href="http://localhost:9800/alreadyUser"
+          window.location.href="/alreadyUser"
         }else{
           localStorage.clear();
           localStorage.setItem("username", username);
-          window.location.href="http://localhost:9800/survey";
+          window.location.href="/survey";
         }
       });
     });
@@ -103,7 +103,7 @@ $(document).ready(function () {
         data: newSurvey
       }).then(function(data) {
         console.log("created Survey");
-        window.location.href = "http://localhost:9800/main"
+        window.location.href = "/main"
       });
     });
 
@@ -478,10 +478,10 @@ $(document).ready(function () {
         if(data.result){
           username=newUser.userEmail;
           userPassword=newUser.userPassword;
-          window.location.href = "http://localhost:9800/main"
+          window.location.href = "/main"
         }
         else{
-          window.location.href = "http://localhost:9800/404"
+          window.location.href = "/404"
         }
         //window.location.href = "http://localhost:9800/main";
        
