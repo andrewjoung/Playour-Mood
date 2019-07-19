@@ -1,9 +1,11 @@
 <div id="registerMain">
     <div id="registerMainContent" class="container">
         <!-- Default form register -->
+        <h1 id="appTitle">Pla<span class="your">your</span> Mood</h1>
+
         <form id="registerForm" class="text-center border border-light p-5" action="#!">
 
-            <p class="h4 mb-4">Sign up</p>
+            <p class="h4 mb-4" id="welcome">Sign In / Register</p>
 
             <!-- E-mail -->
             <input type="email" class="form-control mb-4" placeholder="E-mail" id="userEmail">
@@ -15,20 +17,26 @@
                 At least 8 characters and 1 digit
             </small>
 
-            <button class="btn btn-info my-4 btn-block" type="submit" id="registerButton">Register</button>
-            
-           
+            <div class="row">
+                <div class="col-6">
+                    <button class="btn btn-info my-4 btn-block registerButtons" id="signIn">Sign In</button>
+                </div>
+
+                <div class="col-6">
+                    <button class="btn btn-info my-4 btn-block registerButtons" type="submit" id="registerButton">Register</button>
+                </div>
+            </div>
 
             <div id="googleButtonParent">
                 <div class="g-signin2" data-onsuccess="onSignIn" data-onfailure="onFailure" data-theme="dark"></div>
             </div>
             <!-- Terms of service -->
-            <p>By clicking
+            <p id="agreeTerms">By clicking
                 <em>Sign up</em> you agree to our
-                <a href="" target="_blank">terms of service</a>
+                <a href="" target="_blank" class="greenText">terms of service</a>
 
         </form>
-        <button class="btn btn-info my-4 btn-block" id="signIn">Sign In</button>
+        {{!-- <button class="btn btn-info my-4 btn-block" id="signIn">Sign In</button> --}}
     </div>
 </div>
 
@@ -37,13 +45,14 @@
 <script>
     var favGen = [];
     var email;
-    /** $('#surveyMain').hide();
+    /** $('#surveyMain').hide(); */
 
     
-
+    /*
     $('#registerButton').on('click', function () {
         $('#registerMain').hide();
         $('#surveyMain').show();
+        
         $('#saveSurvey').on('click', function () {
             $.each($("#chk:checked"), function () {
                 favGen.push($(this).val());
@@ -52,7 +61,11 @@
             console.log($('#rainyDayOptions option:selected').text());
             console.log($('#cloudyDayOptions option:selected').text());
             console.log($('#sunnyDayOptions option:selected').text());
-         **/
+        })
+    
+
+    });*/
+    
 
     function onFailure() { console.error('Failure'); }
 

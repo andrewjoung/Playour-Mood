@@ -42,7 +42,7 @@ $(document).ready(function () {
     });
 
 
-    $("#registerForm").on("submit", function(event) {
+    $("#registerButton").on("click", function(event) {
 
       console.log("register submitted");
 
@@ -238,6 +238,7 @@ $(document).ready(function () {
         
         $(this).on('click',function(){
          if($(this).attr('state-of-button')=='not'){
+           
            console.log("if($(this).attr('state-of-button')==='not')");
            $(this).toggleClass('fa-heart fa-heart-o');
            $(this).attr('state-of-button','yes');
