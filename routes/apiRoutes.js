@@ -6,7 +6,7 @@ require('dotenv').config();
 
 var spotify = new Spotify({
   id: process.env.SPOTIFY_ID,
-  secret: process.env.SPOTIFY_SECRET
+  secret: process.env.SPOTIFY_SECRET,
 });
 
 module.exports = function (app) {
@@ -191,11 +191,40 @@ module.exports = function (app) {
   app.post('/songs',function(req,res){
     db.favoriteSongs.create({
       uname:req.body.uname,
-      song:req.body.song
+      song:req.body.song,
+      weather:req.body.weather,
+      artist:req.body.artist,
+      url:req.body.url
     }).then(function(postData){
       res.json(postData);
     });
   });
+
+  app.delete('/songs',function(req,res){
+    db.favoriteSongs.destroy({
+      where:{
+        uname:req.body.uname,
+        song:req.body.song,
+        weather:req.body.weather
+      }
+    }).then(function(postData){
+      res.json(postData);
+    });
+  });
+
+  app.get('/songs',function(req,res){
+    console.log(req.body.weather);
+      db.favoriteSongs.findAll({
+        where:{
+          uname:req.query.uname,
+          weather:req.query.weather
+        }
+      }).then(function(postData){
+        res.send(postData);
+      });
+    
+    
+  })
 
   //TODO:
   //Spotify API call

@@ -126,6 +126,7 @@ $(document).ready(function () {
       $.ajax(ajaxURL , {type:"GET"}).then(function(data){
         console.log(data);
         console.log(data.weatherData.weather[0].main);
+        localStorage.setItem('weather',data.weatherData.weather[0].main);
   
         dataToUse = data;
         //console.log(data.spotifyData.playlists);
@@ -190,6 +191,51 @@ $(document).ready(function () {
         closeNav();
     });
 
+    $('#cloudy').on('click',function(){
+      console.log('you clicked on cloudy');
+      var userSongs = {
+        uname: localStorage.getItem('username'),
+        weather:'Clouds'
+      };
+      $.ajax("/songs?uname="+localStorage.getItem('username')+"?weather="+userSongs.weather, {
+        type: "GET",
+        data: userSongs
+      }).then(function(data) {
+        console.log(data);
+        
+      });
+    });
+
+    $('#rainy').on('click',function(){
+      console.log('you clicked on Rainy');
+      var userSongs = {
+        uname: localStorage.getItem('username'),
+        weather:'Rain'
+      };
+      $.ajax("/songs?uname="+localStorage.getItem('username')+"?weather="+userSongs.weather, {
+        type: "GET",
+        data: userSongs
+      }).then(function(data) {
+        console.log(data);
+        
+      });
+    });
+
+    $('#sunny').on('click',function(){
+      console.log('you clicked on sunny');
+      var userSongs = {
+        uname: localStorage.getItem('username'),
+        weather:'Clear'
+      };
+      $.ajax("/songs?uname="+localStorage.getItem('username')+"?weather="+userSongs.weather, {
+        type: "GET",
+        data: userSongs
+      }).then(function(data) {
+        console.log(data);
+        
+      });
+    });
+
     // $.ajax("/getweather", {type:"GET"}).then(function(data){
     //   console.log(data);
     //   console.log(data.weatherData.weather[0].main);
@@ -250,6 +296,8 @@ $(document).ready(function () {
         likeButton.addClass('likebutton');
         likeButton.attr('song-name',dataToUse.songsToUse[i].track.name);
         likeButton.attr('state-of-button','not');
+        likeButton.attr('artist',dataToUse.songsToUse[i].track.artists[0].name);
+        likeButton.attr('url',dataToUse.songsToUse[i].track.preview_url);
   
 
         var songTitle = $("<p>");
@@ -295,26 +343,69 @@ $(document).ready(function () {
            console.log("if($(this).attr('state-of-button')==='not')");
            $(this).toggleClass('fa-heart fa-heart-o');
            $(this).attr('state-of-button','yes');
+            if(localStorage.getItem('weather').toLocaleLowerCase()==='haze'||localStorage.getItem('weather').toLocaleLowerCase()==='clouds'||localStorage.getItem('weather').toLocaleLowerCase()==='fog'){
+              var userSongs = {
+                uname: localStorage.getItem('username'),
+                song:$(this).attr('song-name'),
+                weather:"Clouds",
+                artist: $(this).attr('artist'),
+                url:$(this).attr('url')
+              };
+              $.ajax("/songs", {
+                type: "POST",
+                data: userSongs
+              }).then(function(data) {
+                console.log("Entered to database");
+                // if(data.result){
+                //   window.location.href="http://localhost:9800/alreadyUser"
+                // }else{
+                //   window.location.href="http://localhost:9800/survey"
+                // }
+              });
+            }else{
+              var userSongs = {
+                uname: localStorage.getItem('username'),
+                song:$(this).attr('song-name'),
+                weather:localStorage.getItem('weather'),
+                artist: $(this).attr('artist'),
+                url:$(this).attr('url')
+              };
+              $.ajax("/songs", {
+                type: "POST",
+                data: userSongs
+              }).then(function(data) {
+                console.log("Entered to database");
+                // if(data.result){
+                //   window.location.href="http://localhost:9800/alreadyUser"
+                // }else{
+                //   window.location.href="http://localhost:9800/survey"
+                // }
+              });
 
-            var userSongs = {
-              uname: localStorage.getItem('username'),
-              song:$(this).attr('song-name')
-            };
-            $.ajax("/songs", {
-              type: "POST",
-              data: userSongs
-            }).then(function(data) {
-              console.log("Entered to database");
-              // if(data.result){
-              //   window.location.href="http://localhost:9800/alreadyUser"
-              // }else{
-              //   window.location.href="http://localhost:9800/survey"
-              // }
-            });
+            }
+
+            
          }else if($(this).attr('state-of-button')=='yes'){
           console.log("else");
           $(this).toggleClass('fas fa-heart-o');
           $(this).attr('state-of-button','not');
+
+          var userSongs = {
+            uname: localStorage.getItem('username'),
+            song:$(this).attr('song-name'),
+            weather:localStorage.getItem('weather')
+          };
+          $.ajax("/songs", {
+            type: "DELETE",
+            data: userSongs
+          }).then(function(data) {
+            console.log("Deleted to database");
+            // if(data.result){
+            //   window.location.href="http://localhost:9800/alreadyUser"
+            // }else{
+            //   window.location.href="http://localhost:9800/survey"
+            // }
+          });
 
          }
 
