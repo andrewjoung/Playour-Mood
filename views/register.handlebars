@@ -88,7 +88,7 @@
             data: goggleUser
         }).then(function (data) {
             if (data.result) {
-                window.location.href = "http://localhost:9800/alreadyUser"
+                window.location.href = "http://localhost:9800/main";
             } else {
                 localStorage.clear();
                 localStorage.setItem("username", profile.getEmail());
