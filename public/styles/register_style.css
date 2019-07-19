@@ -2,10 +2,33 @@ body {
     background-color: #282828;
 }
 
-#registerForm {
+#registerForm, #surveyMainContent {
     border: none!important;
-    padding-left: 18rem!important;
-    padding-right: 18rem!important;
+    padding-left: 20vw!important;
+    padding-right: 20vw!important;
+}
+
+#saveSurvey {
+    background-color: #00c851!important;
+    border-radius: 20px;
+}
+
+.surveyLabel {
+    color: #00c851;
+
+}
+
+#chk {
+    margin-right: 10px;
+}
+
+.checkText {
+    color: white;
+}
+
+.input-group-text {
+    background-color: #282828;
+    border: none;
 }
 
 .registerButtons {
