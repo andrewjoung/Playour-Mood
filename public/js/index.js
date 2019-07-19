@@ -1,8 +1,9 @@
-<<<<<<< HEAD
-=======
+
 //TODO:
 //side nav 
->>>>>>> a8039c968374699e3fe42f2f654ab293509a3ec3
+//fix bugs, sometimes it wont pause, allow for play/pause and if a new song is pressed while another song is playing,
+//allow for current song to be paused and new song to play
+
 
 $(document).ready(function () {
   var username;
@@ -41,7 +42,7 @@ $(document).ready(function () {
     });
 
 
-    $("#registerForm").on("submit", function(event) {
+    $("#registerButton").on("click", function(event) {
 
       console.log("register submitted");
 
