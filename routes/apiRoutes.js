@@ -2,10 +2,11 @@ var db = require("../models");
 var axios = require('axios');
 var Spotify = require('node-spotify-api');
 var sequelize = require('sequelize');
+require('dotenv').config();
 
 var spotify = new Spotify({
-  id: "d551accfb0ba4db99eb755dd09d0bc0c",
-  secret: "398b1703348c4ef2a7f8905e6c4178a1"
+  id: process.env.SPOTIFY_ID,
+  secret: process.env.SPOTIFY_SECRET,
 });
 
 module.exports = function(app) {
@@ -127,7 +128,10 @@ module.exports = function(app) {
   app.post('/songs',function(req,res){
     db.favoriteSongs.create({
       uname:req.body.uname,
-      song:req.body.song
+      song:req.body.song,
+      weather:req.body.weather,
+      artist:req.body.artist,
+      url:req.body.url
     }).then(function(postData){
       res.json(postData);
     });
@@ -137,12 +141,27 @@ module.exports = function(app) {
     db.favoriteSongs.destroy({
       where:{
         uname:req.body.uname,
-        song:req.body.song
+        song:req.body.song,
+        weather:req.body.weather
       }
     }).then(function(postData){
       res.json(postData);
     });
   });
+
+  app.get('/songs',function(req,res){
+    console.log(req.body.weather);
+      db.favoriteSongs.findAll({
+        where:{
+          uname:req.query.uname,
+          weather:req.query.weather
+        }
+      }).then(function(postData){
+        res.send(postData);
+      });
+    
+    
+  })
 
   //TODO:
   //Spotify API call
