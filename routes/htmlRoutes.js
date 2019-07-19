@@ -4,9 +4,9 @@ var axios = require('axios');
 module.exports = function(app) {
   // Load index page
   app.get("/", function(req, res) {
-    
     res.render("register");
   });
+  
   app.get("/main", function(req, res) {
     res.render("index");
   });
