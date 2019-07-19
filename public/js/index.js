@@ -122,8 +122,8 @@ $(document).ready(function () {
     $.ajax("/database/" + specificUser, {type:"GET"}).then(function(data){
       //console.log("User data" + data);
       console.log(data);
-      
-      $.ajax("/getweather", {type:"GET"}).then(function(data){
+      var ajaxURL = "/getweather/" + data.zipcode + "/" + data.cloudy_choices + "/" + data.rainy_choices + "/" + data.sunny_choices + "/" + data.fav_genre;
+      $.ajax(ajaxURL , {type:"GET"}).then(function(data){
         console.log(data);
         console.log(data.weatherData.weather[0].main);
         localStorage.setItem('weather',data.weatherData.weather[0].main);

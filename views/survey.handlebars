@@ -1,28 +1,32 @@
 <div id="surveyMain">
     <div class="container text-center border border-light p-3" id="surveyMainContent" style="margin-top:5%">
-      <label>What genre of music do you like primarily listen to?</label>
+<<<<<<< HEAD
+      <label class="surveyLabel">What genre of music do you primarily listen to?</label>
+=======
+      <label>What genre of music do you primarily listen to?</label>
+>>>>>>> e7b96e518e9c070d67eb18e636d4c041c47b008a
         <div class="input-group mb-8 justify-content-center">
             <div class="input-group-prepend">
                 <div class="input-group-text">
-                    <input type="checkbox" aria-label="Checkbox for following text input" value="Rock" id="chk">Rock
+                    <input type="checkbox" aria-label="Checkbox for following text input" value="Rock" id="chk"><span class="checkText">Rock</span>
                     <br>
                 </div>
                 <div class="input-group-text">
-                    <input type="checkbox" aria-label="Checkbox for following text input" value="Pop" id="chk">Pop<br>
+                    <input type="checkbox" aria-label="Checkbox for following text input" value="Pop" id="chk"><span class="checkText">Pop</span><br>
                 </div>
                 <div class="input-group-text">
                     <input type="checkbox" aria-label="Checkbox for following text input" value="Hip-Hop"
-                        id="chk">Hip-Hop<br>
+                        id="chk"><span class="checkText">Hip-Hop</span><br>
                 </div>
                 <div class="input-group-text">
-                    <input type="checkbox" aria-label="Checkbox for following text input" value="Jazz" id="chk">Jazz<br>
+                    <input type="checkbox" aria-label="Checkbox for following text input" value="Jazz" id="chk"><span class="checkText">Jazz</span><br>
                 </div>
                 <div class="input-group-text">
-                    <input type="checkbox" aria-label="Checkbox for following text input" value="Pop Rock" id="chk">Pop
-                    Rock<br>
+                    <input type="checkbox" aria-label="Checkbox for following text input" value="Pop Rock" id="chk"><span class="checkText">Pop Rock</span>
+                    <br>
                 </div>
                 <div class="input-group-text">
-                    <input type="checkbox" aria-label="Checkbox for following text input" value="Grunge"id="chk">Grunge<br>
+                    <input type="checkbox" aria-label="Checkbox for following text input" value="Grunge"id="chk"><span class="checkText">Grunge</span><br>
                 </div> 
             </div>
 
@@ -30,29 +34,29 @@
 
         <br>
 
-        <label>On rainy days, you like to listen to: </label>
+        <label class="surveyLabel">On rainy days, you like to listen to: </label>
         <select id="rainyDayOptions" class="browser-default custom-select mb-4">
             <option value="" disabled>Choose option</option>
             <option value="slow" selected>Slow, calming</option>
             <option value="happy">Happy, uplifting, exciting</option>
         </select>
 
-        <label>On cloudy days, you like to listen to: </label>
+        <label class="surveyLabel">On cloudy days, you like to listen to: </label>
         <select id="cloudyDayOptions" class="browser-default custom-select mb-4">
             <option value="" disabled>Choose option</option>
             <option value="slow" selected>Slow, calming</option>
             <option value="happy">Happy, uplifting, exciting </option>
         </select>
 
-        <label>On sunny days, you like to listen to: </label>
+        <label class="surveyLabel">On sunny days, you like to listen to: </label>
         <select id="sunnyDayOptions" class="browser-default custom-select mb-4">
             <option value="" disabled>Choose option</option>
             <option value="slow" selected>Slow, calming</option>
             <option value="happy">Happy, uplifting, exciting</option>
         </select>
 
-         <label>Enter a zip code: </label>
-         <input type="text"  id="zip"><br>
+         <label class="surveyLabel">Enter a zip code: </label>
+         <input type="text"  class="form-control mb-4" id="zip"><br>
 
         <button class="btn btn-info my-4 btn-block" id="saveSurvey">Save</button>
 
