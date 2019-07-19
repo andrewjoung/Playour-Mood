@@ -316,6 +316,22 @@ $(document).ready(function () {
           $(this).toggleClass('fas fa-heart-o');
           $(this).attr('state-of-button','not');
 
+          var userSongs = {
+            uname: localStorage.getItem('username'),
+            song:$(this).attr('song-name')
+          };
+          $.ajax("/songs", {
+            type: "DELETE",
+            data: userSongs
+          }).then(function(data) {
+            console.log("Deleted to database");
+            // if(data.result){
+            //   window.location.href="http://localhost:9800/alreadyUser"
+            // }else{
+            //   window.location.href="http://localhost:9800/survey"
+            // }
+          });
+
          }
 
         });

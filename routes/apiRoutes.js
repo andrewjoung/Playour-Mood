@@ -133,6 +133,17 @@ module.exports = function(app) {
     });
   });
 
+  app.delete('/songs',function(req,res){
+    db.favoriteSongs.destroy({
+      where:{
+        uname:req.body.uname,
+        song:req.body.song
+      }
+    }).then(function(postData){
+      res.json(postData);
+    });
+  });
+
   //TODO:
   //Spotify API call
   app.get("/getsongs", function(req, res) {
