@@ -1,0 +1,51 @@
+body {
+    background-color: #282828;
+}
+
+#registerForm {
+    border: none!important;
+    padding-left: 18rem!important;
+    padding-right: 18rem!important;
+}
+
+.registerButtons {
+    margin: 0 auto;
+    border-radius: 20px;
+}
+
+#signIn {
+    background-color: #00c851!important;
+}
+
+#registerButton {
+    background-color:#282828!important;
+    border: 1px solid white;
+}
+
+#registerButton:hover {
+    border: 1px solid #00c851;
+    color: #00c851;
+}
+
+.form-text {
+    margin-bottom: 0!important;
+}
+
+#welcome {
+    font-family: 'Varela', sans-serif;
+    color: white!important;
+}
+
+#appTitle {
+    font-family: 'Varela', sans-serif;
+}
+
+#agreeTerms {
+    color: #6c757d;
+    margin-top: 1rem;
+    font-size: 12px;
+}
+
+.greenText {
+    color: #00c851;
+}

@@ -42,7 +42,7 @@ $(document).ready(function () {
     });
 
 
-    $("#registerForm").on("submit", function(event) {
+    $("#registerButton").on("click", function(event) {
 
       console.log("register submitted");
 
