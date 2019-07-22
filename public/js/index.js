@@ -205,7 +205,10 @@ $(document).ready(function () {
         data: userSongs
       }).then(function(data) {
         console.log(data);
-        
+        $("#weatherModalLabel").text("Your Cloudy Playlist");
+        $('#weatherModalHeader').attr('class','modal-header cloudy-modal');
+        displaySavedSongs(data);
+        closeNav();
       });
     });
 
@@ -220,7 +223,10 @@ $(document).ready(function () {
         data: userSongs
       }).then(function(data) {
         console.log(data);
-        
+        $("#weatherModalLabel").text("Your Rainy Playlist");
+        $('#weatherModalHeader').attr('class','modal-header rainy-modal');
+        displaySavedSongs(data);
+        closeNav();
       });
     });
 
@@ -235,9 +241,44 @@ $(document).ready(function () {
         data: userSongs
       }).then(function(data) {
         console.log(data);
-        
+        $("#weatherModalLabel").text("Your Sunny Playlist");
+        $('#weatherModalHeader').attr('class','modal-header sunny-modal');
+        displaySavedSongs(data);
+        closeNav();
       });
     });
+
+    function displaySavedSongs(data) {
+      $("#weatherModalBodyContent").empty();
+      for(var i = 0; i < data.length; i++) {
+        var songDiv = $("<div>");
+        songDiv.addClass("songDiv");
+        songDiv.addClass('row');
+  
+        var playButton = $("<i>");
+        playButton.addClass('far fa-play-circle fa-lg');
+        playButton.addClass('col-2');
+        playButton.addClass('playbutton');
+  
+        var songTitle = $("<p>");
+        songTitle.addClass('col-4');
+        songTitle.addClass('songTitle');
+  
+        var artist = $("<p>");
+        artist.addClass('col-4');
+        artist.addClass('songData');
+  
+        var line = $("<hr>");
+
+        songTitle.text(data[i].song);
+        artist.text(data[i].artist);
+
+        playButton.attr('data-url', data[i].url);
+
+        songDiv.append(playButton).append(songTitle).append(artist).append(line);
+        $("#weatherModalBodyContent").append(songDiv);
+      }
+    }
     
     //TODO:
     //Spotify API call
@@ -379,8 +420,6 @@ $(document).ready(function () {
         });
         
       });
-
-     
      
 
       //TODO: 
