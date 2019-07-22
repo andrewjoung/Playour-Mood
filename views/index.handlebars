@@ -3,9 +3,9 @@
 
   <div id="mySidenav" class="sidenav">
     <a href="javascript:void(0)" class="closebtn">&times;</a>
-    <a href="#" class="sideNavOption" id="sunny">Sunny</a>
-    <a href="#" class="sideNavOption" id="cloudy">Cloudy</a>
-    <a href="#" class="sideNavOption" id="rainy">Rainy</a>
+    <a href="#" class="sideNavOption" id="sunny" data-weather="sunny" data-toggle="modal" data-target="#weatherPlaylistModal">Sunny</a>
+    <a href="#" class="sideNavOption" id="cloudy" data-weather="cloudy" data-toggle="modal" data-target="#weatherPlaylistModal">Cloudy</a>
+    <a href="#" class="sideNavOption" id="rainy"  data-weather="rainy" data-toggle="modal" data-target="#weatherPlaylistModal">Rainy</a>
     <a href="#" class="sideNavOption">Settings</a>
   </div>
   <!-- As a heading -->
@@ -41,6 +41,38 @@
               <p class="col-4"></p>
               <p class="col-4 columnTitle">Title</p>
               <p class="col-4 columnArtist">Artist</p>   
+            </div>
+          </div>
+          {{!-- <div class="modal-footer">
+            <button type="button" class="btn btn-primary">Save changes</button>
+          </div> --}}
+        </div>
+      </div>
+    </div>
+
+    <!-- Specific Playlist Modal -->
+    <div class="modal fade" id="weatherPlaylistModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+      aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="foreground">
+            <div class="modal-header" id="weatherModalHeader">
+
+              <h5 class="modal-title" id="weatherModalLabel">Daily Playlist</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+
+            </div>
+          </div>
+          <div class="modal-body" id="weatherModalBody">
+            <div id="columnNames" class="row">
+              <p class="col-2"></p>
+              <p class="col-5 columnTitle">Title</p>
+              <p class="col-5 columnArtist">Artist</p>   
+            </div>
+            <div id="weatherModalBodyContent">
+
             </div>
           </div>
           {{!-- <div class="modal-footer">
